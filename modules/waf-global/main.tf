@@ -138,7 +138,7 @@ resource "aws_waf_web_acl" "waf_acl" {
 }
 
 #
-# This is how we link the WAF ACL to one or many ALBs.
+# This is how we link the WAF ACL to one or many CloudFront distributions.
 #
 resource "aws_wafregional_web_acl_association" "acl_cloudfront_association" {
   depends_on   = ["aws_waf_web_acl.waf_acl"]
