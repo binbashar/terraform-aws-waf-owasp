@@ -1,8 +1,8 @@
 <div align="center">
-    <img src="./figures/binbash.png" alt="drawing" width="350"/>
+    <img src="https://binbashar.github.io/terraform-waf-owasp/figures/binbash.png" alt="drawing" width="350"/>
 </div>
 <div align="right">
-  <img src="./figures/binbash-leverage-terraform.png" alt="leverage" width="230"/>
+  <img src="https://binbashar.github.io/terraform-waf-owasp/figures/binbash-leverage-terraform.png" alt="leverage" width="230"/>
 </div>
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
@@ -23,7 +23,7 @@ Security Risks. This module is based on the whitepaper that AWS provides. The wh
 to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws-waf-owasp.pdf)[[4]](https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/).
 
 <div align="left">
-  <img src="./figures/binbash-tf-aws-waf.png" alt="leverage" width="430"/>
+  <img src="https://binbashar.github.io/terraform-waf-owasp/figures/binbash-tf-aws-waf.png" alt="leverage" width="430"/>
 </div>
 
 ### This module will create:
@@ -32,7 +32,7 @@ to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws
  3. WebACL[[7]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html), resources 1 and 2 cannot be used without 3.
 
 <div align="left">
-  <img src="./figures/binbash-aws-tf-waf-diagram.png" alt="leverage" width="630"/>
+  <img src="https://binbashar.github.io/terraform-waf-owasp/figures/binbash-aws-tf-waf-diagram.png" alt="leverage" width="630"/>
 </div>
 
 **NOTE:** Diagram to be taken just as reference, needs update to reflect the exact deployed resources.
