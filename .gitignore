@@ -1,0 +1,91 @@
+# Hidden files #
+################
+.*
+#
+# Except
+#
+!*.env.example
+!*.dockeringnore
+!*.hosts
+!/.gitignore
+!/.chglog
+!/.gitallowed
+!*.gitkeep
+
+# SSH keys #
+############
+id_rsa
+id_dsa
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tar.gz
+
+#
+# Except
+#
+!lambda_function.*.zip
+!lambda_function.lambda_handler.zip
+!lambda_function.*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.out
+
+# IDE related files #
+#####################
+.classpath
+.project
+.settings
+.idea
+.metadata
+*.iml
+*.ipr
+.vscode
+
+# Custom Project tools files #
+########################
+*.pyc
+*.pyo
+*.vault_pass
+*.pgpass
+*.vagrant
+
+# TF Project files #
+####################
+#
+# Compiled files
+#
+*.tfstate
+*.tfstate.backup
+#
+# Module directory
+#
+.terraform
+#
+# Terratest
+#
+tests/vendor/
