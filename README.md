@@ -53,7 +53,33 @@ References
 
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
-* AWS Whitepaper - https://d0.awsstatic.com/whitepapers/Security/aws-waf-owasp.pdf
+
+## Parameters are synced in both waf-regional and waf-global modules
+### Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| admin\_remote\_ipset | List of IPs allowed to access admin pages | list | n/a | yes |
+| alb\_arn | List of ALB ARNs | list | n/a | yes |
+| blacklisted\_ips | List of IPs to blacklist | list | n/a | yes |
+| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_size\_restriction\_action\_type\_enable | Enable rule\_size\_restriction\_action\_type if set to true, otherwise don't use attach this rule to the waf web acl | string | `"false"` | no |
+| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
+
+### Outputs
+
+| Name | Description |
+|------|-------------|
+| web\_acl\_id |  |
 
 ## Examples
 ### waf-regional

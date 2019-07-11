@@ -38,7 +38,6 @@ References
 
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
-* AWS Whitepaper - https://d0.awsstatic.com/whitepapers/Security/aws-waf-owasp.pdf
 
 ## Examples
 ### waf-regional

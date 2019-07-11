@@ -11,6 +11,9 @@ TF_PWD_CONT_DIR := "/go/src/project/"
 TF_DOCKER_ENTRYPOINT := /usr/local/go/bin/terraform
 TF_DOCKER_IMAGE := binbash/terraform-resources
 
+TERRATEST_DOCKER_ENTRYPOINT := dep
+TERRATEST_DOCKER_WORKDIR := /go/src/project/tests
+
 #
 # TERRAFORM
 #
@@ -18,6 +21,28 @@ define TF_CMD_PREFIX
 docker run --rm \
 -v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
 --entrypoint=${TF_DOCKER_ENTRYPOINT} \
+-it ${TF_DOCKER_IMAGE}:${TF_VER}
+endef
+
+#
+# TERRATEST
+#
+define TERRATEST_GO_CMD_PREFIX
+docker run --rm \
+-v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
+-v ${LOCAL_OS_SSH_DIR}:/root/.ssh \
+-v ${LOCAL_OS_GIT_CONF_DIR}:/etc/gitconfig \
+-v ${LOCAL_OS_AWS_CONF_DIR}:/root/.aws \
+-w ${TERRATEST_DOCKER_WORKDIR} \
+-it ${TF_DOCKER_IMAGE}:${TF_VER}
+endef
+
+define TERRATEST_DEP_CMD_PREFIX
+docker run --rm \
+-v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
+-v ${LOCAL_OS_SSH_DIR}:/root/.ssh \
+-v ${LOCAL_OS_GIT_CONF_DIR}:/etc/gitconfig \
+--entrypoint=${TERRATEST_DOCKER_ENTRYPOINT} \
 -it ${TF_DOCKER_IMAGE}:${TF_VER}
 endef
 
@@ -54,8 +79,26 @@ version: ## Show terraform version
 format: ## The terraform fmt is used to rewrite tf conf files to a canonical format and style.
 	${TF_CMD_PREFIX} fmt ${TF_PWD_CONT_DIR}
 
+doc: ## A utility to generate documentation from Terraform modules in various output formats.
+	docker run --rm -v ${TF_PWD_DIR}:/data -t binbash/terraform-docs markdown table /data
+
 lint: ## TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan.
 	docker run --rm -v ${TF_PWD_DIR}:/data -t wata727/tflint --deep
+
+
+#==============================================================#
+# TERRATEST 												   #
+#==============================================================#
+terratest-dep-init: ## dep is a dependency management tool for Go. (https://github.com/golang/dep)
+	${TERRATEST_DEP_CMD_PREFIX} init
+	${TERRATEST_DEP_CMD_PREFIX} ensure
+	sudo chown -R ${LOCAL_OS_USER}:${LOCAL_OS_USER} .
+	cp -r ./vendor ./tests/ && rm -rf ./vendor
+	cp -r ./Gopkg* ./tests/ && rm -rf ./Gopkg*
+
+terratest-go-test: ## lint: TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan.
+	${TERRATEST_GO_CMD_PREFIX} test
+	sudo chown -R ${LOCAL_OS_USER}:${LOCAL_OS_USER} .
 
 #==============================================================#
 # GIT RELEASE 												   #
