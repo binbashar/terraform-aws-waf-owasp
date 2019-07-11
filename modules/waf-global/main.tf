@@ -25,30 +25,32 @@ resource "aws_waf_web_acl" "waf_acl" {
 
   #
   # Reason: we are not implementing an IP blacklist yet.
+  # So COMMENT rule block below to deactivate this rule
   #
-  # rule {
-  #   action {
-  #     type = "${var.rule_blacklisted_ips_action_type}"
-  #   }
-  # 
-  #   priority = 20
-  #   rule_id  = "${aws_waf_rule.detect_blacklisted_ips.id}"
-  #   type     = "REGULAR"
-  # }
+  rule {
+    action {
+      type = "${var.rule_blacklisted_ips_action_type}"
+    }
+  
+    priority = 20
+    rule_id  = "${aws_waf_rule.detect_blacklisted_ips.id}"
+    type     = "REGULAR"
+  }
 
 
   #
   # Reason: the apps do not use auth tokens yet.
+  # So COMMENT rule block below to deactivate this rule
   #
-  # rule {
-  #   action {
-  #     type = "${var.rule_auth_tokens_action}"
-  #   }
-  # 
-  #   priority = 30
-  #   rule_id  = "${aws_waf_rule.detect_bad_auth_tokens.id}"
-  #   type     = "REGULAR"
-  # }
+  rule {
+    action {
+      type = "${var.rule_auth_tokens_action}"
+    }
+  
+    priority = 30
+    rule_id  = "${aws_waf_rule.detect_bad_auth_tokens.id}"
+    type     = "REGULAR"
+  }
 
   rule {
     action {
@@ -80,30 +82,32 @@ resource "aws_waf_web_acl" "waf_acl" {
 
   #
   # Reason: we don't have PHP stacks on this project.
+  # So COMMENT rule block below to deactivate this rule
   #
-  # rule {
-  #   action {
-  #     type = "${var.rule_php_insecurities_action_type}"
-  #   }
-  # 
-  #   priority = 70
-  #   rule_id  = "${aws_waf_rule.detect_php_insecure.id}"
-  #   type     = "REGULAR"
-  # }
+  rule {
+    action {
+      type = "${var.rule_php_insecurities_action_type}"
+    }
+  
+    priority = 70
+    rule_id  = "${aws_waf_rule.detect_php_insecure.id}"
+    type     = "REGULAR"
+  }
 
 
   #
   # Reason: the apps do not use CSRF tokens.
+  # So COMMENT rule block below to deactivate this rule
   #
-  # rule {
-  #   action {
-  #     type = "${var.rule_csrf_action_type}"
-  #   }
-  # 
-  #   priority = 80
-  #   rule_id  = "${aws_waf_rule.enforce_csrf.id}"
-  #   type     = "REGULAR"
-  # }
+  rule {
+    action {
+      type = "${var.rule_csrf_action_type}"
+    }
+  
+    priority = 80
+    rule_id  = "${aws_waf_rule.enforce_csrf.id}"
+    type     = "REGULAR"
+  }
 
   #
   # Reason: this should cover any config files in our web root folder.
@@ -120,16 +124,17 @@ resource "aws_waf_web_acl" "waf_acl" {
 
   #
   # Reason: we do not have IP restriction on admin sections.
+  # So COMMENT rule block below to deactivate this rule
   #
-  # rule {
-  #   action {
-  #     type = "${var.rule_admin_access_action_type}"
-  #   }
-  # 
-  #   priority = 100
-  #   rule_id  = "${aws_waf_rule.detect_admin_access.id}"
-  #   type     = "REGULAR"
-  # }
+  rule {
+    action {
+      type = "${var.rule_admin_access_action_type}"
+    }
+  
+    priority = 100
+    rule_id  = "${aws_waf_rule.detect_admin_access.id}"
+    type     = "REGULAR"
+  }
 }
 
 #

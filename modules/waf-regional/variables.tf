@@ -18,59 +18,51 @@ variable "alb_arn" {
 }
 
 variable "rule_sqli_action" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_auth_tokens_action" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_xss_action" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_lfi_rfi_action" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_admin_access_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_php_insecurities_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
-#
-# rule_size_restriction_action_type
-#
-variable "rule_size_restriction_action_type_enable" {
-  description = "Enable rule_size_restriction_action_type if set to true, otherwise don't use attach this rule to the waf web acl"
-  default     = "false"
-}
-
 variable "rule_size_restriction_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_csrf_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_ssi_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
 variable "rule_blacklisted_ips_action_type" {
-  default     = "BLOCK"
+  default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }

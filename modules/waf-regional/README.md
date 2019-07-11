@@ -70,23 +70,32 @@ References
 #### waf-regional-alb
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v0.0.1"
+    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v0.0.4"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
-    
+
     # List of IPs that are blacklisted
     blacklisted_ips = []
-    
+
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
-    
+
     # Pass the list of ALB ARNs that the WAF ACL will be connected to
     alb_arn = [
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
     ]
-    
-    # Use COUNT for test, then you can use BLOCK (by default)
-    rule_action_type = "COUNT"
+
+    # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
+    rule_size_restriction_action_type   = "COUNT"
+    rule_sqli_action                    = "COUNT"
+    rule_xss_action                     = "COUNT"
+    rule_lfi_rfi_action                 = "COUNT"
+    rule_ssi_action_type                = "COUNT"
+    rule_auth_tokens_action             = "COUNT"
+    rule_admin_access_action_type       = "COUNT"
+    rule_php_insecurities_action_type   = "COUNT"
+    rule_csrf_action_type               = "COUNT"
+    rule_blacklisted_ips_action_type    = "COUNT"
 }
 ```

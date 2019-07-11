@@ -4,7 +4,6 @@
 ## Enforce consistent request hygene, limit size of key elements
 
 resource "aws_wafregional_rule" "restrict_sizes" {
-  count       = "${var.rule_size_restriction_action_type_enable == true ? 1 : 0}"
   name        = "${var.waf_prefix}-generic-restrict-sizes"
   metric_name = "${var.waf_prefix}genericrestrictsizes"
 
@@ -16,7 +15,6 @@ resource "aws_wafregional_rule" "restrict_sizes" {
 }
 
 resource "aws_wafregional_size_constraint_set" "size_restrictions" {
-  count = "${var.rule_size_restriction_action_type_enable == true ? 1 : 0}"
   name  = "${var.waf_prefix}-generic-size-restrictions"
 
   #
