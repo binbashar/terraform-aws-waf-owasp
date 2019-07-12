@@ -8,7 +8,7 @@ resource "aws_waf_rule" "detect_rfi_lfi_traversal" {
   name        = "${var.waf_prefix}-generic-detect-rfi-lfi-traversal"
   metric_name = "${var.waf_prefix}genericdetectrfilfitraversal"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_rfi_lfi_traversal.id}"
     negated = false
     type    = "ByteMatch"

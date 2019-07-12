@@ -7,13 +7,13 @@ resource "aws_waf_rule" "enforce_csrf" {
   name        = "${var.waf_prefix}-generic-enforce-csrf"
   metric_name = "${var.waf_prefix}genericenforcecsrf"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_csrf_method.id}"
     negated = false
     type    = "ByteMatch"
   }
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_size_constraint_set.csrf_token_set.id}"
     negated = true
     type    = "SizeConstraint"

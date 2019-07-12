@@ -7,7 +7,7 @@ resource "aws_waf_rule" "detect_ssi" {
   name        = "${var.waf_prefix}-generic-detect-ssi"
   metric_name = "${var.waf_prefix}genericdetectssi"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_ssi.id}"
     negated = false
     type    = "ByteMatch"

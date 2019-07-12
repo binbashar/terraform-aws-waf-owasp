@@ -7,7 +7,7 @@ resource "aws_waf_rule" "detect_blacklisted_ips" {
   name        = "${var.waf_prefix}-generic-detect-blacklisted-ips"
   metric_name = "${var.waf_prefix}genericdetectblacklistedips"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_ipset.blacklisted_ips.id}"
     negated = false
     type    = "IPMatch"
@@ -16,5 +16,5 @@ resource "aws_waf_rule" "detect_blacklisted_ips" {
 
 resource "aws_waf_ipset" "blacklisted_ips" {
   name              = "${var.waf_prefix}-generic-match-blacklisted-ips"
-  ip_set_descriptor = "${var.blacklisted_ips}"
+  ip_set_descriptors = "${var.blacklisted_ips}"
 }

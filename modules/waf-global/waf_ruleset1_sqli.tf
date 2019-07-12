@@ -7,7 +7,7 @@ resource "aws_waf_rule" "mitigate_sqli" {
   name        = "${var.waf_prefix}-generic-mitigate-sqli"
   metric_name = "${var.waf_prefix}genericmitigatesqli"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_sql_injection_match_set.sql_injection_match_set.id}"
     negated = false
     type    = "SqlInjectionMatch"

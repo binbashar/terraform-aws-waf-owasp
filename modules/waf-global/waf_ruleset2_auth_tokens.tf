@@ -8,7 +8,7 @@ resource "aws_waf_rule" "detect_bad_auth_tokens" {
   name        = "${var.waf_prefix}-generic-detect-bad-auth-tokens"
   metric_name = "${var.waf_prefix}genericdetectbadauthtokens"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_auth_tokens.id}"
     negated = false
     type    = "ByteMatch"

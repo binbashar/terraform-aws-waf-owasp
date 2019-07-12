@@ -8,13 +8,13 @@ resource "aws_waf_rule" "detect_admin_access" {
   name        = "${var.waf_prefix}-generic-detect-admin-access"
   metric_name = "${var.waf_prefix}genericdetectadminaccess"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_ipset.admin_remote_ipset.id}"
     negated = true
     type    = "IPMatch"
   }
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_admin_url.id}"
     negated = false
     type    = "ByteMatch"
@@ -23,7 +23,7 @@ resource "aws_waf_rule" "detect_admin_access" {
 
 resource "aws_waf_ipset" "admin_remote_ipset" {
   name              = "${var.waf_prefix}-generic-match-admin-remote-ip"
-  ip_set_descriptor = "${var.admin_remote_ipset}"
+  ip_set_descriptors = "${var.admin_remote_ipset}"
 }
 
 resource "aws_waf_byte_match_set" "match_admin_url" {

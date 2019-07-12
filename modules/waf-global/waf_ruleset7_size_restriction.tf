@@ -7,7 +7,7 @@ resource "aws_waf_rule" "restrict_sizes" {
   name        = "${var.waf_prefix}-generic-restrict-sizes"
   metric_name = "${var.waf_prefix}genericrestrictsizes"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_size_constraint_set.size_restrictions.id}"
     negated = false
     type    = "SizeConstraint"

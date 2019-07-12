@@ -7,13 +7,13 @@ resource "aws_waf_rule" "detect_php_insecure" {
   name        = "${var.waf_prefix}-generic-detect-php-insecure"
   metric_name = "${var.waf_prefix}genericdetectphpinsecure"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_php_insecure_uri.id}"
     negated = false
     type    = "ByteMatch"
   }
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_byte_match_set.match_php_insecure_var_refs.id}"
     negated = false
     type    = "ByteMatch"

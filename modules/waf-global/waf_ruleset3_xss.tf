@@ -7,7 +7,7 @@ resource "aws_waf_rule" "mitigate_xss" {
   name        = "${var.waf_prefix}-generic-mitigate-xss"
   metric_name = "${var.waf_prefix}genericmitigatexss"
 
-  predicate {
+  predicates {
     data_id = "${aws_waf_xss_match_set.xss_match_set.id}"
     negated = false
     type    = "XssMatch"
