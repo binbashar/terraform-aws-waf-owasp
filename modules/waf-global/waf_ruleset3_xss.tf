@@ -17,7 +17,7 @@ resource "aws_waf_rule" "mitigate_xss" {
 resource "aws_waf_xss_match_set" "xss_match_set" {
   name = "${var.waf_prefix}-generic-detect-xss"
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -25,7 +25,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -33,7 +33,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -41,7 +41,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -49,7 +49,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -57,7 +57,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -65,7 +65,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -74,7 +74,7 @@ resource "aws_waf_xss_match_set" "xss_match_set" {
     }
   }
 
-  xss_match_tuple {
+  xss_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {

@@ -17,7 +17,7 @@ resource "aws_waf_rule" "mitigate_sqli" {
 resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
   name = "${var.waf_prefix}-generic-detect-sqli"
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -25,7 +25,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -33,7 +33,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -41,7 +41,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -49,7 +49,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -57,7 +57,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -65,7 +65,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -74,7 +74,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
@@ -83,7 +83,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
 
     field_to_match {
@@ -92,7 +92,7 @@ resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 
-  sql_injection_match_tuple {
+  sql_injection_match_tuples {
     text_transformation = "URL_DECODE"
 
     field_to_match {
