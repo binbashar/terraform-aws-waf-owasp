@@ -46,6 +46,12 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
+## Releases
+- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
+
+- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible -> **WIP**)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
 
 ## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
 * Global WAF for CloudFront usage
