@@ -155,3 +155,28 @@ module "waf_regional_test" {
     rule_blacklisted_ips_action_type    = "COUNT"
 }
 ```
+
+# Release Management
+
+## Docker based makefile commands
+- https://cloud.docker.com/u/binbash/repository/docker/binbash/git-release
+- https://github.com/binbashar/terraform-aws-waf-owasp/blob/master/Makefile
+
+Root directory `Makefile` has the automated steps (to be integrated with **CircleCI jobs** []() )
+
+### CircleCi PR auto-release job
+<div align="left">
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/circleci.png" alt="leverage-circleci" width="230"/>
+</div>
+
+- https://circleci.com/gh/binbashar/terraform-aws-waf-owasp
+- **NOTE:** Will only run after merged PR.
+
+### Manual execution from workstation
+```
+$ make
+Available Commands:
+ - release-major-with-changelog make changelog-major && git add && git commit && make release-major
+ - release-minor-with-changelog make changelog-minor && git add && git commit && make release-minor
+ - release-patch-with-changelog make changelog-patch && git add && git commit && make release-patch
+ ```
