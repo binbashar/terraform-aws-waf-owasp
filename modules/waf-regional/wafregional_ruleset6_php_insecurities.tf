@@ -5,16 +5,16 @@
 
 resource "aws_wafregional_rule" "detect_php_insecure" {
   name        = "${var.waf_prefix}-generic-detect-php-insecure"
-  metric_name = "${var.waf_prefix}genericdetectphpinsecure"
+  metric_name = replace("${var.waf_prefix}genericdetectphpinsecure", "/[^0-9A-Za-z]/", "")
 
   predicate {
-    data_id = "${aws_wafregional_byte_match_set.match_php_insecure_uri.id}"
+    data_id = aws_wafregional_byte_match_set.match_php_insecure_uri.id
     negated = false
     type    = "ByteMatch"
   }
 
   predicate {
-    data_id = "${aws_wafregional_byte_match_set.match_php_insecure_var_refs.id}"
+    data_id = aws_wafregional_byte_match_set.match_php_insecure_var_refs.id
     negated = false
     type    = "ByteMatch"
   }
@@ -127,3 +127,4 @@ resource "aws_wafregional_byte_match_set" "match_php_insecure_var_refs" {
     }
   }
 }
+

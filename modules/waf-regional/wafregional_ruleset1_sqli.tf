@@ -5,10 +5,10 @@
 
 resource "aws_wafregional_rule" "mitigate_sqli" {
   name        = "${var.waf_prefix}-generic-mitigate-sqli"
-  metric_name = "${var.waf_prefix}genericmitigatesqli"
+  metric_name = replace("${var.waf_prefix}genericmitigatesqli", "/[^0-9A-Za-z]/", "")
 
   predicate {
-    data_id = "${aws_wafregional_sql_injection_match_set.sql_injection_match_set.id}"
+    data_id = aws_wafregional_sql_injection_match_set.sql_injection_match_set.id
     negated = false
     type    = "SqlInjectionMatch"
   }
@@ -101,3 +101,4 @@ resource "aws_wafregional_sql_injection_match_set" "sql_injection_match_set" {
     }
   }
 }
+

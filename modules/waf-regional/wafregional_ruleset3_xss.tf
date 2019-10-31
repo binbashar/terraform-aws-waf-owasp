@@ -5,10 +5,10 @@
 
 resource "aws_wafregional_rule" "mitigate_xss" {
   name        = "${var.waf_prefix}-generic-mitigate-xss"
-  metric_name = "${var.waf_prefix}genericmitigatexss"
+  metric_name = replace("${var.waf_prefix}genericmitigatexss", "/[^0-9A-Za-z]/", "")
 
   predicate {
-    data_id = "${aws_wafregional_xss_match_set.xss_match_set.id}"
+    data_id = aws_wafregional_xss_match_set.xss_match_set.id
     negated = false
     type    = "XssMatch"
   }
@@ -83,3 +83,4 @@ resource "aws_wafregional_xss_match_set" "xss_match_set" {
     }
   }
 }
+
