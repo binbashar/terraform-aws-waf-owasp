@@ -5,16 +5,16 @@
 
 resource "aws_wafregional_rule" "enforce_csrf" {
   name        = "${var.waf_prefix}-generic-enforce-csrf"
-  metric_name = "${var.waf_prefix}genericenforcecsrf"
+  metric_name = replace("${var.waf_prefix}genericenforcecsrf", "/[^0-9A-Za-z]/", "")
 
   predicate {
-    data_id = "${aws_wafregional_byte_match_set.match_csrf_method.id}"
+    data_id = aws_wafregional_byte_match_set.match_csrf_method.id
     negated = false
     type    = "ByteMatch"
   }
 
   predicate {
-    data_id = "${aws_wafregional_size_constraint_set.csrf_token_set.id}"
+    data_id = aws_wafregional_size_constraint_set.csrf_token_set.id
     negated = true
     type    = "SizeConstraint"
   }
@@ -48,3 +48,4 @@ resource "aws_wafregional_size_constraint_set" "csrf_token_set" {
     }
   }
 }
+
