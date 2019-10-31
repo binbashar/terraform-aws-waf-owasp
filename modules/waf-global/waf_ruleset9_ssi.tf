@@ -5,10 +5,10 @@
 
 resource "aws_waf_rule" "detect_ssi" {
   name        = "${var.waf_prefix}-generic-detect-ssi"
-  metric_name = "${var.waf_prefix}genericdetectssi"
+  metric_name = replace("${var.waf_prefix}genericdetectssi", "/[^0-9A-Za-z]/", "")
 
   predicates {
-    data_id = "${aws_waf_byte_match_set.match_ssi.id}"
+    data_id = aws_waf_byte_match_set.match_ssi.id
     negated = false
     type    = "ByteMatch"
   }
@@ -97,3 +97,4 @@ resource "aws_waf_byte_match_set" "match_ssi" {
     }
   }
 }
+

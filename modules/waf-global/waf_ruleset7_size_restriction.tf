@@ -5,10 +5,10 @@
 
 resource "aws_waf_rule" "restrict_sizes" {
   name        = "${var.waf_prefix}-generic-restrict-sizes"
-  metric_name = "${var.waf_prefix}genericrestrictsizes"
+  metric_name = replace("${var.waf_prefix}genericrestrictsizes", "/[^0-9A-Za-z]/", "")
 
   predicates {
-    data_id = "${aws_waf_size_constraint_set.size_restrictions.id}"
+    data_id = aws_waf_size_constraint_set.size_restrictions.id
     negated = false
     type    = "SizeConstraint"
   }
@@ -59,3 +59,4 @@ resource "aws_waf_size_constraint_set" "size_restrictions" {
     }
   }
 }
+

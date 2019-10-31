@@ -3,17 +3,20 @@ variable "waf_prefix" {
 }
 
 variable "blacklisted_ips" {
-  type        = "list"
-  description = "List of IPs to blacklist"
+  default     = []
+  type        = list(string)
+  description = "List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
 variable "admin_remote_ipset" {
-  type        = "list"
-  description = "List of IPs allowed to access admin pages"
+  default     = []
+  type        = list(string)
+  description = "List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
 variable "cloudfront_arn" {
-  type        = "list"
+  default     = []
+  type        = list(string)
   description = "List of CloudFront Distributions ARNs"
 }
 
@@ -66,3 +69,10 @@ variable "rule_blacklisted_ips_action_type" {
   default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
+
+variable "tags" {
+  type        = "map"
+  description = "A mapping of tags to assign to all resources"
+  default     = {}
+}
+

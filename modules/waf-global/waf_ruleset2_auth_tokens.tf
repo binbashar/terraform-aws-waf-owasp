@@ -6,10 +6,10 @@
 
 resource "aws_waf_rule" "detect_bad_auth_tokens" {
   name        = "${var.waf_prefix}-generic-detect-bad-auth-tokens"
-  metric_name = "${var.waf_prefix}genericdetectbadauthtokens"
+  metric_name = replace("${var.waf_prefix}genericdetectbadauthtokens", "/[^0-9A-Za-z]/", "")
 
   predicates {
-    data_id = "${aws_waf_byte_match_set.match_auth_tokens.id}"
+    data_id = aws_waf_byte_match_set.match_auth_tokens.id
     negated = false
     type    = "ByteMatch"
   }
@@ -40,3 +40,4 @@ resource "aws_waf_byte_match_set" "match_auth_tokens" {
     }
   }
 }
+
