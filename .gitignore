@@ -91,4 +91,5 @@ Thumbs.db
 #
 # Terratest
 #
-tests/vendor/
+modules/waf-global/tests/vendor/
+modules/waf-regional/tests/vendor/
