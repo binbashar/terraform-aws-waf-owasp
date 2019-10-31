@@ -51,7 +51,7 @@ jobs:
   test-e2e-terratests:
     machine:
       image: ubuntu-1604:201903-01
-      #docker_layer_caching: true
+      docker_layer_caching: false
 
     steps:
       - checkout
@@ -108,7 +108,7 @@ jobs:
   release-patch-with-changelog:
     machine:
       image: ubuntu-1604:201903-01
-      #docker_layer_caching: true
+      docker_layer_caching: false
 
     steps:
       - checkout
