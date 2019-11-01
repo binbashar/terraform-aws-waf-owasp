@@ -7,11 +7,26 @@
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
 
-## Important
-The original source was taken from https://github.com/Twinuma/terraform-waf-owasp and was adapted to the needs of the project at hand.
+## terraform-aws-waf-owasp
+
+### IMPORTANT CONSIDERATIONS
+1. The original source was taken from https://github.com/Twinuma/terraform-waf-owasp and was adapted to the needs of the project at hand.
 We've also had https://registry.terraform.io/modules/juiceinc/juiceinc-waf as reference.
 
-## terraform-aws-waf-owasp
+2. **SUB-MODULE SELECTION**
+    * **Global WAF** for CloudFront usage
+    * **Regional WAF** for Regional/ALB and/or API Gateway Stage usage
+
+## Releases
+- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
+
+- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
+
+
+## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
+
 OWASP Top 10 Most Critical Web Application Security Risks is a powerful awareness document for web
 application security. It represents a broad consensus about the most critical security risks to web applications.
 Project members include a variety of security experts from around the world who have shared their expertise to
@@ -26,24 +41,8 @@ to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws
   <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-tf-aws-waf.png" alt="leverage" width="430"/>
 </div>
 
-## Releases
-- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
-
-- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
-
-
-## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
-
-### IMPORTANT CONSIDERATION
-#### SUB-MODULE SELECTION
-* **Global WAF** for CloudFront usage
-* **Regional WAF** for Regional/ALB and/or API Gateway Stage usage
-
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
-
 
 ### This module will create:
  1. match-sets[[5]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-create-condition.html), to be associated with rules.
@@ -71,27 +70,29 @@ References
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages | list | n/a | yes |
-| alb\_arn | List of ALB ARNs | list | n/a | yes |
-| blacklisted\_ips | List of IPs to blacklist | list | n/a | yes |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_size\_restriction\_action\_type\_enable | Enable rule\_size\_restriction\_action\_type if set to true, otherwise don't use attach this rule to the waf web acl | string | `"false"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
+| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
+| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| tags | A mapping of tags to assign to all resources | map | `<map>` | no |
 | waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| web\_acl\_id |  |
+| web\_acl\_id | AWS WAF web acl id. |
+| web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
+| web\_acl\_name | The name or description of the web ACL. |
+
 
 ## Examples
 ### waf-regional
