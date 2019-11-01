@@ -17,11 +17,6 @@ module "waf_regional_test" {
   # List of IPs that are allowed to access admin pages
   admin_remote_ipset = []
 
-  # Pass the list of CloudFront distribution ARNs that the WAF ACL will be connected to
-  cloudfront_arn = [
-      "arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5"
-  ]
-
   # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
   rule_size_restriction_action_type   = "COUNT"
   rule_sqli_action                    = "COUNT"
