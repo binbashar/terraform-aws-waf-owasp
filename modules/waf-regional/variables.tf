@@ -14,11 +14,12 @@ variable "admin_remote_ipset" {
   description = "List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
-variable "alb_arn" {
-  default     = []
-  type        = list(string)
-  description = "List of ALB ARNs"
-}
+// TODO: check main.tf resource aws_wafregional_web_acl_association comment
+//variable "alb_arn" {
+//  default     = []
+//  type        = list(string)
+//  description = "List of ALB ARNs"
+//}
 
 variable "rule_sqli_action" {
   default     = "COUNT"
