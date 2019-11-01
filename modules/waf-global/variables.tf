@@ -14,12 +14,6 @@ variable "admin_remote_ipset" {
   description = "List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
-variable "cloudfront_arn" {
-  default     = []
-  type        = list(string)
-  description = "List of CloudFront Distributions ARNs"
-}
-
 variable "rule_sqli_action" {
   default     = "COUNT"
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
