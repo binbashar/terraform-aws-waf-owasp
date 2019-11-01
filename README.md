@@ -65,7 +65,7 @@ References
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
 
-## Parameters are synced in both waf-regional and waf-global modules
+## Parameters are almost synced in both waf-regional and waf-global modules
 ### Inputs
 
 | Name | Description | Type | Default | Required |
