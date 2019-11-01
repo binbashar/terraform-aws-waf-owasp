@@ -51,8 +51,9 @@ variable "admin_remote_ipset" {
   description = "List of IPs allowed to access admin pages"
 }
 
-variable "alb_arn" {
-  default     = []
-  type        = list(string)
-  description = "List of CloudFront Distributions ARNs"
-}
+// TODO: to be validated
+//variable "alb_arn" {
+//  default     = []
+//  type        = list(string)
+//  description = "List of CloudFront Distributions ARNs"
+//}

@@ -50,9 +50,3 @@ variable "admin_remote_ipset" {
   type        = list(string)
   description = "List of IPs allowed to access admin pages"
 }
-
-variable "cloudfront_arn" {
-  default     = []
-  type        = list(string)
-  description = "List of CloudFront Distributions ARNs"
-}

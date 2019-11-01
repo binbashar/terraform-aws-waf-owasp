@@ -37,8 +37,9 @@ module "waf_regional_test" {
   # List of IPs that are allowed to access admin pages
   admin_remote_ipset = var.admin_remote_ipset
 
+  # TODO: to be validated if the association support a list or only single resources
   # Pass the list of ALB ARNs that the WAF ACL will be connected to
-  alb_arn = var.alb_arn
+  #alb_arn = var.alb_arn
 
   # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
   rule_size_restriction_action_type   = "COUNT"

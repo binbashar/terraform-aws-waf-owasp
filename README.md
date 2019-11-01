@@ -7,11 +7,26 @@
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
 
-## Important
-The original source was taken from https://github.com/Twinuma/terraform-waf-owasp and was adapted to the needs of the project at hand.
+## terraform-aws-waf-owasp
+
+### IMPORTANT CONSIDERATIONS
+1. The original source was taken from https://github.com/Twinuma/terraform-waf-owasp and was adapted to the needs of the project at hand.
 We've also had https://registry.terraform.io/modules/juiceinc/juiceinc-waf as reference.
 
-## terraform-aws-waf-owasp
+2. **SUB-MODULE SELECTION**
+    * **Global WAF** for CloudFront usage
+    * **Regional WAF** for Regional/ALB and/or API Gateway Stage usage
+
+## Releases
+- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
+
+- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
+
+
+## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
+
 OWASP Top 10 Most Critical Web Application Security Risks is a powerful awareness document for web
 application security. It represents a broad consensus about the most critical security risks to web applications.
 Project members include a variety of security experts from around the world who have shared their expertise to
@@ -25,6 +40,9 @@ to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws
 <div align="left">
   <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-tf-aws-waf.png" alt="leverage" width="430"/>
 </div>
+
+**For more information:**
+* AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
 ### This module will create:
  1. match-sets[[5]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-create-condition.html), to be associated with rules.
@@ -46,53 +64,42 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
-## Releases
-- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
 
-- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible -> **WIP**)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
-
-## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
-* Global WAF for CloudFront usage
-* Regional WAF for Regional/ALB usage
-
-**For more information:**
-* AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
-
-## Parameters are synced in both waf-regional and waf-global modules
+## Parameters are almost synced in both waf-regional and waf-global modules
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages | list | n/a | yes |
-| alb\_arn | List of ALB ARNs | list | n/a | yes |
-| blacklisted\_ips | List of IPs to blacklist | list | n/a | yes |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_size\_restriction\_action\_type\_enable | Enable rule\_size\_restriction\_action\_type if set to true, otherwise don't use attach this rule to the waf web acl | string | `"false"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"BLOCK"` | no |
+| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
+| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
+| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
+| tags | A mapping of tags to assign to all resources | map | `<map>` | no |
 | waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
 
 ### Outputs
 
 | Name | Description |
 |------|-------------|
-| web\_acl\_id |  |
+| web\_acl\_id | AWS WAF web acl id. |
+| web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
+| web\_acl\_name | The name or description of the web ACL. |
+
 
 ## Examples
 ### waf-regional
 #### waf-regional-alb
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v0.0.4"
+    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v1.0.0"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -103,10 +110,11 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
+    # TODO: to be validated if the assoc supports a list or only a single resource
     # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    alb_arn = [
-        "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
-    ]
+    #alb_arn = [
+    #    "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
+    #]
 
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"
@@ -126,7 +134,7 @@ module "waf_regional_test" {
 #### waf-global-cloudfront
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v0.0.4"
+    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.0"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -136,11 +144,6 @@ module "waf_regional_test" {
 
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
-
-    # Pass the list of CloudFront distribution ARNs that the WAF ACL will be connected to
-    cloudfront_arn = [
-        "arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5"
-    ]
 
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"
