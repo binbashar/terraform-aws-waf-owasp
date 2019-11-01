@@ -15,6 +15,20 @@ This is a Terraform module which creates AWF WAF resources for protection of you
 Security Risks. This module is based on the whitepaper that AWS provides. The whitepaper tells how to use AWS WAF
 to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws-waf-owasp.pdf)[[4]](https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/).
 
+## Releases
+- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
+
+- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
+
+
+## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
+
+### IMPORTANT CONSIDERATION
+#### WAF REGIONAL SUB-MODULE 
+* **Regional WAF** for Regional/ALB and/or API Gateway Stage usage
+
 ### This module will create:
  1. match-sets[[5]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-create-condition.html), to be associated with rules.
  2. rules[[6]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html),
@@ -31,11 +45,6 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
-
-## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
-* Global WAF for CloudFront usage
-* Regional WAF for Regional/ALB usage
-
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
@@ -44,7 +53,6 @@ References
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| alb\_arn | List of ALB ARNs | list(string) | `<list>` | no |
 | blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
 | rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
 | rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
@@ -65,6 +73,7 @@ References
 | web\_acl\_id | AWS WAF web acl id. |
 | web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
 | web\_acl\_name | The name or description of the web ACL. |
+
 
 ## Examples
 ### waf-regional

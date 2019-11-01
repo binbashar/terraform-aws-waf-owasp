@@ -26,6 +26,25 @@ to mitigate those attacks[[3]](https://d0.awsstatic.com/whitepapers/Security/aws
   <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-tf-aws-waf.png" alt="leverage" width="430"/>
 </div>
 
+## Releases
+- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
+
+- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible)
+    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
+
+
+## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
+
+### IMPORTANT CONSIDERATION
+#### SUB-MODULE SELECTION
+* **Global WAF** for CloudFront usage
+* **Regional WAF** for Regional/ALB and/or API Gateway Stage usage
+
+**For more information:**
+* AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
+
+
 ### This module will create:
  1. match-sets[[5]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-create-condition.html), to be associated with rules.
  2. rules[[6]](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html),
@@ -46,19 +65,6 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
-## Releases
-- **Versions:** `<= 0.x.y` (Terraform 0.11.x compatible)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/0.0.1
-
-- **Versions:** `>= 1.x.y` (Terraform 0.12.x compatible -> **WIP**)
-    - eg: https://registry.terraform.io/modules/binbashar/waf-owasp/aws/1.0.0
-
-## Use AWS WAF at terraform to Mitigate OWASP’s Top 10 Web Application Vulnerabilities
-* Global WAF for CloudFront usage
-* Regional WAF for Regional/ALB usage
-
-**For more information:**
-* AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
 ## Parameters are synced in both waf-regional and waf-global modules
 ### Inputs
@@ -92,7 +98,7 @@ References
 #### waf-regional-alb
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v0.0.4"
+    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v1.0.0"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -103,10 +109,11 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
+    # TODO: to be validated if the assoc supports a list or only a single resource
     # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    alb_arn = [
-        "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
-    ]
+    #alb_arn = [
+    #    "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
+    #]
 
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"
@@ -126,7 +133,7 @@ module "waf_regional_test" {
 #### waf-global-cloudfront
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v0.0.4"
+    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.0"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -136,11 +143,6 @@ module "waf_regional_test" {
 
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
-
-    # Pass the list of CloudFront distribution ARNs that the WAF ACL will be connected to
-    cloudfront_arn = [
-        "arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5"
-    ]
 
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"
