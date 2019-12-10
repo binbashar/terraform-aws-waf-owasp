@@ -6,7 +6,7 @@ LOCAL_OS_GIT_CONF_DIR := ~/.gitconfig
 LOCAL_OS_AWS_CONF_DIR := ~/.aws
 
 TF_PWD_DIR := $(shell pwd)
-TF_VER := 0.12.12
+TF_VER := 0.12.17
 TF_PWD_CONT_DIR := "/go/src/project/"
 TF_DOCKER_ENTRYPOINT := /usr/local/go/bin/terraform
 TF_DOCKER_IMAGE := binbash/terraform-resources
@@ -67,10 +67,28 @@ doc-tf-eleven: ## A utility to generate documentation from Terraform 0.11 module
 	docker run --rm -v ${TF_PWD_DIR}:/data -t binbash/terraform-docs markdown table /data
 
 doc-tf-twelve: ## A utility to generate documentation from Terraform 0.12 modules in various output formats.
-	bash terraform-docs.sh markdown ${TF_PWD_DIR}
+	docker run --rm \
+  	-v $$(pwd):/data \
+  	cytopia/terraform-docs:0.6.0 \
+  	terraform-docs-012 --sort-inputs-by-required --with-aggregate-type-defaults markdown table .
 
-lint: ## TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan (tf0.11 --> < 0.9.2.
+lint-eleven: ## TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan (tf0.11 < 0.9.2).
 	docker run --rm -v ${TF_PWD_DIR}:/data -t wata727/tflint:0.9.2 --deep
+
+lint: ## TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan (tf0.12 > 0.10.x).
+	docker run --rm \
+	-v ${LOCAL_OS_AWS_CONF_DIR}:/root/.aws \
+	-v ${TF_PWD_DIR}:/data \
+	-t wata727/tflint:0.12.1
+
+lint-deep: ## TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan (tf0.12 > 0.10.x).
+	docker run --rm \
+	-v ${LOCAL_OS_AWS_CONF_DIR}:/root/.aws \
+	-v ${TF_PWD_DIR}:/data \
+	-t wata727/tflint:0.12.1 --deep \
+	--aws-profile=${LOCAL_OS_AWS_PROFILE} \
+	--aws-creds-file=/root/.aws/credentials \
+	--aws-region=${LOCAL_OS_AWS_REGION}
 
 #==============================================================#
 # TERRATEST 												   #
@@ -82,6 +100,6 @@ terratest-dep-init: ## dep is a dependency management tool for Go. (https://gith
 	cp -r ./vendor ./tests/ && rm -rf ./vendor
 	cp -r ./Gopkg* ./tests/ && rm -rf ./Gopkg*
 
-terratest-go-test: ## lint: TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan.
+terratest-go-test: ## Run E2E terratests
 	${TERRATEST_GO_CMD_PREFIX} test
 	sudo chown -R ${LOCAL_OS_USER}:${LOCAL_OS_USER} .

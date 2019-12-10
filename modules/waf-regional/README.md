@@ -57,8 +57,10 @@ References
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
+| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
+| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `[]` | no |
+| alb\_arn | List of ALB ARNs | list(string) | `[]` | no |
+| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `[]` | no |
 | rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
 | rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
 | rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
@@ -69,7 +71,6 @@ References
 | rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
 | rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
 | rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
 
 ## Outputs
 
@@ -78,7 +79,6 @@ References
 | web\_acl\_id | AWS WAF web acl id. |
 | web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
 | web\_acl\_name | The name or description of the web ACL. |
-
 
 ## Examples
 ### waf-regional
@@ -96,11 +96,11 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
-    # TODO: validation/testing of waf assoc needed
     # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    #alb_arn = [
-    #    "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345678"
-    #]
+    alb_arn = [
+        "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345111",
+        "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1244/12345222"
+    ]
 
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"

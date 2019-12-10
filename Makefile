@@ -6,10 +6,13 @@ LOCAL_OS_GIT_CONF_DIR := ~/.gitconfig
 LOCAL_OS_AWS_CONF_DIR := ~/.aws
 
 TF_PWD_DIR := $(shell pwd)
-TF_VER := 0.12.12
+TF_VER := 0.12.17
 TF_PWD_CONT_DIR := "/go/src/project/"
 TF_DOCKER_ENTRYPOINT := /usr/local/go/bin/terraform
 TF_DOCKER_IMAGE := binbash/terraform-resources
+
+TERRATEST_DOCKER_ENTRYPOINT := dep
+TERRATEST_DOCKER_WORKDIR := /go/src/project/tests
 
 #
 # TERRAFORM
@@ -18,6 +21,28 @@ define TF_CMD_PREFIX
 docker run --rm \
 -v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
 --entrypoint=${TF_DOCKER_ENTRYPOINT} \
+-it ${TF_DOCKER_IMAGE}:${TF_VER}
+endef
+
+#
+# TERRATEST
+#
+define TERRATEST_GO_CMD_PREFIX
+docker run --rm \
+-v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
+-v ${LOCAL_OS_SSH_DIR}:/root/.ssh \
+-v ${LOCAL_OS_GIT_CONF_DIR}:/etc/gitconfig \
+-v ${LOCAL_OS_AWS_CONF_DIR}:/root/.aws \
+-w ${TERRATEST_DOCKER_WORKDIR} \
+-it ${TF_DOCKER_IMAGE}:${TF_VER}
+endef
+
+define TERRATEST_DEP_CMD_PREFIX
+docker run --rm \
+-v ${TF_PWD_DIR}:${TF_PWD_CONT_DIR}:rw \
+-v ${LOCAL_OS_SSH_DIR}:/root/.ssh \
+-v ${LOCAL_OS_GIT_CONF_DIR}:/etc/gitconfig \
+--entrypoint=${TERRATEST_DOCKER_ENTRYPOINT} \
 -it ${TF_DOCKER_IMAGE}:${TF_VER}
 endef
 
