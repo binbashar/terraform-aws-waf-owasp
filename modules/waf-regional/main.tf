@@ -136,13 +136,12 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
 }
 
 #
-# TODO: Tests the following regional assoc resource before releasing this func
-# This is how we link the WAF ACL to one or many ALBs.
+# Link the WAF ACL to an ALBs.
 #
-//resource "aws_wafregional_web_acl_association" "acl_alb_association" {
-//  depends_on   = [aws_wafregional_web_acl.wafregional_acl]
-//  count        = length(var.alb_arn)
-//  resource_arn = element(var.alb_arn, count.index)
-//  web_acl_id   = aws_wafregional_web_acl.wafregional_acl.id
-//}
+resource "aws_wafregional_web_acl_association" "acl_alb_association" {
+  depends_on   = [aws_wafregional_web_acl.wafregional_acl]
+  count        = length(var.alb_arn)
+  resource_arn = var.alb_arn[count.index]
+  web_acl_id   = aws_wafregional_web_acl.wafregional_acl.id
+}
 
