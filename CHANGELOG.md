@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="v1.0.2"></a>
+## [v1.0.2] - 2019-12-10
+### Pull Requests
+- Merge pull request [#4](https://github.com/binbashar/terraform-waf-owasp/issues/4) from binbashar/BBL-140-waf-regional-assoc
+
+
 <a name="v1.0.1"></a>
 ## [v1.0.1] - 2019-11-01
 ### Pull Requests
@@ -44,7 +50,8 @@
 <a name="v0.0.1"></a>
 ## v0.0.1 - 2019-07-11
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.2...HEAD
+[v1.0.2]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.1...v1.0.2
 [v1.0.1]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/binbashar/terraform-waf-owasp/compare/v0.0.10...v1.0.0
 [v0.0.10]: https://github.com/binbashar/terraform-waf-owasp/compare/v0.0.9...v0.0.10
