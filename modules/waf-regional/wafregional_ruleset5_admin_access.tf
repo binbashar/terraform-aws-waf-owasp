@@ -29,7 +29,7 @@ resource "aws_wafregional_ipset" "admin_remote_ipset" {
       //resource "aws_waf_ipset" "test" {
       //  name = "test"
       //
-      //  dynamic "ip_set_descriptors" {
+      //  dynamic "ip_set_descriptor" {
       //    # The for_each argument is a hardcoded list in this illustrative example,
       //    # however it can be sourced from a variable or local value as well as
       //    # support multiple argument values as a map.
@@ -37,17 +37,17 @@ resource "aws_wafregional_ipset" "admin_remote_ipset" {
       //
       //    content {
       //      type  = "IPV4"
-      //      value = ip_set_descriptors.value
+      //      value = ip_set_descriptor.value
       //    }
       //  }
       //}
       //
       //output "test" {
-      //  value = aws_waf_ipset.test.ip_set_descriptors[*].value
+      //  value = aws_waf_ipset.test.ip_set_descriptor[*].value
       //}
 
       type  = "IPV4"
-      value = ip_set_descriptors.value
+      value = ip_set_descriptor.value
     }
   }
 }
