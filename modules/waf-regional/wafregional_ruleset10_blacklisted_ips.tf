@@ -40,7 +40,7 @@ resource "aws_wafregional_ipset" "blacklisted_ips" {
       //}
 
       type  = "IPV4"
-      value = ip_set_descriptors.value
+      value = ip_set_descriptor.value
     }
   }
 }
