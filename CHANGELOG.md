@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="v1.0.3"></a>
+## [v1.0.3] - 2020-01-21
+### Pull Requests
+- Merge pull request [#6](https://github.com/binbashar/terraform-waf-owasp/issues/6) from lucasvinals/formatCode
+
+
 <a name="v1.0.2"></a>
 ## [v1.0.2] - 2019-12-10
 ### Pull Requests
@@ -50,7 +56,8 @@
 <a name="v0.0.1"></a>
 ## v0.0.1 - 2019-07-11
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.3...HEAD
+[v1.0.3]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.2...v1.0.3
 [v1.0.2]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.1...v1.0.2
 [v1.0.1]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/binbashar/terraform-waf-owasp/compare/v0.0.10...v1.0.0
