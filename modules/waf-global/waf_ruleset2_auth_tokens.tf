@@ -4,7 +4,7 @@
 ## Matches the specific values in the cookie or Authorization header
 ## for JWT it is sufficient to check the signature
 
-resource "aws_waf_rule" "detect_bad_auth_tokens" {
+resource aws_waf_rule detect_bad_auth_tokens {
   name        = "${var.waf_prefix}-generic-detect-bad-auth-tokens"
   metric_name = replace("${var.waf_prefix}genericdetectbadauthtokens", "/[^0-9A-Za-z]/", "")
 
@@ -15,7 +15,7 @@ resource "aws_waf_rule" "detect_bad_auth_tokens" {
   }
 }
 
-resource "aws_waf_byte_match_set" "match_auth_tokens" {
+resource aws_waf_byte_match_set match_auth_tokens {
   name = "${var.waf_prefix}-generic-match-auth-tokens"
 
   byte_match_tuples {

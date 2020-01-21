@@ -3,7 +3,7 @@
 ## CSRF token enforcement example
 ## Enforce the presence of CSRF token in request header
 
-resource "aws_waf_rule" "enforce_csrf" {
+resource aws_waf_rule enforce_csrf {
   name        = "${var.waf_prefix}-generic-enforce-csrf"
   metric_name = replace("${var.waf_prefix}genericenforcecsrf", "/[^0-9A-Za-z]/", "")
 
@@ -20,7 +20,7 @@ resource "aws_waf_rule" "enforce_csrf" {
   }
 }
 
-resource "aws_waf_byte_match_set" "match_csrf_method" {
+resource aws_waf_byte_match_set match_csrf_method {
   name = "${var.waf_prefix}-generic-match-csrf-method"
 
   byte_match_tuples {
@@ -34,7 +34,7 @@ resource "aws_waf_byte_match_set" "match_csrf_method" {
   }
 }
 
-resource "aws_waf_size_constraint_set" "csrf_token_set" {
+resource aws_waf_size_constraint_set csrf_token_set {
   name = "${var.waf_prefix}-generic-match-csrf-token"
 
   size_constraints {
