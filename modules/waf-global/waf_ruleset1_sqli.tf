@@ -3,7 +3,7 @@
 ## Mitigate SQL Injection Attacks
 ## Matches attempted SQLi patterns in the URI, QUERY_STRING, BODY, COOKIES
 
-resource "aws_waf_rule" "mitigate_sqli" {
+resource aws_waf_rule mitigate_sqli {
   name        = "${var.waf_prefix}-generic-mitigate-sqli"
   metric_name = replace("${var.waf_prefix}genericmitigatesqli", "/[^0-9A-Za-z]/", "")
 
@@ -14,7 +14,7 @@ resource "aws_waf_rule" "mitigate_sqli" {
   }
 }
 
-resource "aws_waf_sql_injection_match_set" "sql_injection_match_set" {
+resource aws_waf_sql_injection_match_set sql_injection_match_set {
   name = "${var.waf_prefix}-generic-detect-sqli"
 
   sql_injection_match_tuples {

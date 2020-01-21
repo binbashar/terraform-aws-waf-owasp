@@ -1,7 +1,7 @@
 #
 # This is our WAF ACL with each rule defined and prioritized accordingly.
 #
-resource "aws_waf_web_acl" "waf_acl" {
+resource aws_waf_web_acl waf_acl {
   name        = "${var.waf_prefix}-generic-owasp-acl"
   metric_name = replace("${var.waf_prefix}genericowaspacl", "/[^0-9A-Za-z]/", "")
 
@@ -134,6 +134,6 @@ resource "aws_waf_web_acl" "waf_acl" {
     type     = "REGULAR"
   }
 
-  tags = "${var.tags}"
+  tags = var.tags
 }
 

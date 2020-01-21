@@ -3,7 +3,7 @@
 ## PHP Specific Security Misconfigurations
 ## Matches request patterns designed to exploit insecure PHP/CGI configuration
 
-resource "aws_waf_rule" "detect_php_insecure" {
+resource aws_waf_rule detect_php_insecure {
   name        = "${var.waf_prefix}-generic-detect-php-insecure"
   metric_name = replace("${var.waf_prefix}genericdetectphpinsecure", "/[^0-9A-Za-z]/", "")
 
@@ -20,7 +20,7 @@ resource "aws_waf_rule" "detect_php_insecure" {
   }
 }
 
-resource "aws_waf_byte_match_set" "match_php_insecure_uri" {
+resource aws_waf_byte_match_set match_php_insecure_uri {
   name = "${var.waf_prefix}-generic-match-php-insecure-uri"
 
   byte_match_tuples {
@@ -44,7 +44,7 @@ resource "aws_waf_byte_match_set" "match_php_insecure_uri" {
   }
 }
 
-resource "aws_waf_byte_match_set" "match_php_insecure_var_refs" {
+resource aws_waf_byte_match_set match_php_insecure_var_refs {
   name = "${var.waf_prefix}-generic-match-php-insecure-var-refs"
 
   byte_match_tuples {

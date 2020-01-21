@@ -4,7 +4,7 @@
 ## Matches request patterns designed to traverse filesystem paths, and include
 ## local or remote files
 
-resource "aws_waf_rule" "detect_rfi_lfi_traversal" {
+resource aws_waf_rule detect_rfi_lfi_traversal {
   name        = "${var.waf_prefix}-generic-detect-rfi-lfi-traversal"
   metric_name = replace("${var.waf_prefix}genericdetectrfilfitraversal", "/[^0-9A-Za-z]/", "")
 
@@ -15,7 +15,7 @@ resource "aws_waf_rule" "detect_rfi_lfi_traversal" {
   }
 }
 
-resource "aws_waf_byte_match_set" "match_rfi_lfi_traversal" {
+resource aws_waf_byte_match_set match_rfi_lfi_traversal {
   name = "${var.waf_prefix}-generic-match-rfi-lfi-traversal"
 
   byte_match_tuples {

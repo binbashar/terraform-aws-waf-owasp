@@ -3,7 +3,7 @@
 ## Mitigate abnormal requests via size restrictions
 ## Enforce consistent request hygene, limit size of key elements
 
-resource "aws_waf_rule" "restrict_sizes" {
+resource aws_waf_rule restrict_sizes {
   name        = "${var.waf_prefix}-generic-restrict-sizes"
   metric_name = replace("${var.waf_prefix}genericrestrictsizes", "/[^0-9A-Za-z]/", "")
 
@@ -14,7 +14,7 @@ resource "aws_waf_rule" "restrict_sizes" {
   }
 }
 
-resource "aws_waf_size_constraint_set" "size_restrictions" {
+resource aws_waf_size_constraint_set size_restrictions {
   name = "${var.waf_prefix}-generic-size-restrictions"
 
   #
