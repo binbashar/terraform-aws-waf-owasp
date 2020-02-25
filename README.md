@@ -127,7 +127,13 @@ module "waf_regional_test" {
     rule_php_insecurities_action_type   = "COUNT"
     rule_csrf_action_type               = "COUNT"
     rule_blacklisted_ips_action_type    = "COUNT"
+    
+    tags = {
+      "project" = "x"
+    }
 }
+
+
 ```
 
 ### waf-global
