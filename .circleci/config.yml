@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Configure awscli
           command: |
-            chown -R $USER:$USER /home/circleci/.aws
+            sudo chown -R $USER:$USER /home/circleci/.aws
 
             # AWS defautl awscli profile
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
