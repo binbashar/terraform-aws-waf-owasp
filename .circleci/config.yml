@@ -90,11 +90,19 @@ jobs:
 
       - run:
           name: test3-terratests-dep-init
-          command: make terratest-dep-init
+          command: cd modules/waf-global && make terratest-dep-init
 
       - run:
           name: test3-terratests-go-test
-          command: make terratest-go-test
+          command: cd modules/waf-global && make terratest-go-test
+
+      - run:
+          name: test4-terratests-dep-init
+          command: cd modules/waf-regional && make terratest-dep-init
+
+      - run:
+          name: test4-terratests-go-test
+          command: cd modules/waf-regional && make terratest-go-test
 
   #
   # Release
