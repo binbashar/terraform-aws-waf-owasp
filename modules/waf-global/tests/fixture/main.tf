@@ -11,7 +11,7 @@
 #
 #module "backend" {
 #    source      = "../../"
-#    
+#
 #    countries   = "${var.countries}"
 #}
 
@@ -49,5 +49,5 @@ module "waf_global_test" {
   rule_csrf_action_type             = "COUNT"
   rule_blacklisted_ips_action_type  = "COUNT"
 
-  tags = "${local.tags}"
+  tags = local.tags
 }

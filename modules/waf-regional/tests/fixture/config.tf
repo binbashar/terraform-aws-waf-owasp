@@ -35,7 +35,7 @@ data "terraform_remote_state" "vpc" {
   config = {
     region  = var.region
     profile = var.profile
-    bucket  = "bb-dev-terraform-state-storage-s3"
-    key     = "dev/network/terraform.tfstate"
+    bucket  = "bb-apps-devstg-terraform-backend"
+    key     = "apps-devstg/network/terraform.tfstate"
   }
 }
