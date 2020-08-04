@@ -15,7 +15,7 @@ variable "environment" {
 # WAF                          #
 #==============================#
 variable "blacklisted_ips" {
-  default      = []
+  default     = []
   type        = list(string)
   description = "List of IPs to blacklist"
 }
