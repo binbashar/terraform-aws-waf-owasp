@@ -11,6 +11,7 @@
 !/.gitignore
 !/.chglog
 !/.gitallowed
+!/.github
 !*.gitkeep
 
 # SSH keys #
