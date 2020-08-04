@@ -1,0 +1,48 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# we have to set line endings to LF for all bash scripts, otherwise, if you save
+# a script on Windows, it would have CRLF line breaks, which doesn’t work on
+# Linux. This is achieved by a combination of ‘.editorconfig’ defining how the
+# code is displayed in a text editor, and ‘.gitatttributes’, which controls how
+# the file is saved in source control.
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file && 2 space indentation
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 80
+trim_trailing_whitespace = true
+
+# Unix-style newlines with a newline ending every file && 2 space indentation
+[*.sh]
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+# Unix-style newlines with a newline ending every file && 2 space indentation
+[*.py]
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+[*.{tf,tfvars}]
+indent_size = 2
+indent_style = space
+
+[*.md]
+max_line_length = 0
+trim_trailing_whitespace = false
+
+# Tab indentation && 2 space indentation
+[Makefile]
+tab_width = 2
+indent_style = tab
+
+[COMMIT_EDITMSG]
+max_line_length = 0

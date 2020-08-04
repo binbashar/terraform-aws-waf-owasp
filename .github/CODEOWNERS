@@ -1,0 +1,5 @@
+# Use this file to define individuals or teams that are responsible for code in a repository.
+# Read more: <https://help.github.com/articles/about-codeowners/>
+
+* @binbashar/leverage-ref-architecture-aws-admin
+* @binbashar/leverage-ref-architecture-aws-dev

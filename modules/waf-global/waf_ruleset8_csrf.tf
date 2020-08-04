@@ -44,7 +44,7 @@ resource aws_waf_size_constraint_set csrf_token_set {
 
     field_to_match {
       type = "HEADER"
-      data = "x-csrf-token"
+      data = var.rule_csrf_header
     }
   }
 }

@@ -133,6 +133,16 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
     rule_id  = aws_wafregional_rule.detect_admin_access.id
     type     = "REGULAR"
   }
+
+  #
+  # If you want to send WAF logs to Kinesis Firehose "
+  # UNCOMMENT block below to allow it
+  #
+  #logging_configuration {
+  #  log_destination = var.log_destination_arn
+  #}
+
+  tags = var.tags
 }
 
 #

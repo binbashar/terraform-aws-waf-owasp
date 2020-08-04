@@ -44,7 +44,7 @@ References
 #### waf-global-cloudfront
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v0.0.4"
+    source = "github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.4"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"

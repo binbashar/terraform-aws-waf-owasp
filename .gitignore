@@ -11,7 +11,9 @@
 !/.gitignore
 !/.chglog
 !/.gitallowed
+!/.github
 !*.gitkeep
+!*.editorconfig
 
 # SSH keys #
 ############
@@ -93,3 +95,5 @@ Thumbs.db
 #
 modules/waf-global/tests/vendor/
 modules/waf-regional/tests/vendor/
+modules/waf-global/tests/Gopkg.*
+modules/waf-regional/tests/Gopkg.*

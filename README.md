@@ -1,8 +1,10 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png" alt="drawing" width="350"/>
+    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png" 
+    alt="drawing" width="250"/>
 </div>
 <div align="right">
-  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png" alt="leverage" width="230"/>
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png"
+   alt="leverage" width="130"/>
 </div>
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
@@ -99,7 +101,7 @@ References
 #### waf-regional-alb
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v1.0.0"
+    source = "github.com:binbashar/terraform-aws-owasp.git//modules/waf-regional?ref=v1.0.4"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -134,7 +136,7 @@ module "waf_regional_test" {
 #### waf-global-cloudfront
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.0"
+    source = "github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.4"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
@@ -159,27 +161,16 @@ module "waf_regional_test" {
 }
 ```
 
+---
+
 # Release Management
-
-## Docker based makefile commands
-- https://cloud.docker.com/u/binbash/repository/docker/binbash/git-release
-- https://github.com/binbashar/terraform-aws-waf-owasp/blob/master/Makefile
-
-Root directory `Makefile` has the automated steps (to be integrated with **CircleCI jobs** []() )
-
 ### CircleCi PR auto-release job
+
 <div align="left">
-  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/circleci.png" alt="leverage-circleci" width="230"/>
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-owasp/master/figures/circleci-logo.png" 
+  alt="circleci" width="130"/>
 </div>
 
-- https://circleci.com/gh/binbashar/terraform-aws-waf-owasp
-- **NOTE:** Will only run after merged PR.
-
-### Manual execution from workstation
-```
-$ make
-Available Commands:
- - release-major-with-changelog make changelog-major && git add && git commit && make release-major
- - release-minor-with-changelog make changelog-minor && git add && git commit && make release-minor
- - release-patch-with-changelog make changelog-patch && git add && git commit && make release-patch
- ```
+- [**pipeline-job**](https://circleci.com/gh/binbashar/terraform-aws-owasp) (**NOTE:** Will only run after merged PR)
+- [**releases**](https://github.com/binbashar/terraform-aws-owasp/releases)
+- [**changelog**](https://github.com/binbashar/terraform-aws-owasp/blob/master/CHANGELOG.md)
