@@ -56,21 +56,22 @@ References
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| tags | A mapping of tags to assign to all resources | map | `<map>` | no |
-| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
+| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_csrf\_header | The name of your CSRF token header. | `string` | `"x-csrf-token"` | no |
+| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
@@ -80,13 +81,12 @@ References
 | web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
 | web\_acl\_name | The name or description of the web ACL. |
 
-
 ## Examples
 ### waf-global
 #### waf-global-cloudfront
 ```terraform
 module "waf_regional_test" {
-    source = "git::git@github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.0"
+    source = "github.com:binbashar/terraform-aws-owasp.git//modules/waf-global?ref=v1.0.4"
 
     # Just a prefix to add some level of organization
     waf_prefix = "test"
