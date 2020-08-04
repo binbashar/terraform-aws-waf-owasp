@@ -89,7 +89,7 @@ variable rule_blacklisted_ips_action_type {
 
 variable log_destination_arn {
   type        = string
-  default     = null
+  default     = ""
   description = "Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream"
 }
 
