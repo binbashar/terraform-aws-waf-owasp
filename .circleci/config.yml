@@ -39,7 +39,7 @@ jobs:
             aws configure set output json
 
             # AWS dev awscli profile
-            aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_SHARED:role/DeployMaster --profile $AWS_PROFILE_NAME
+            aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_DEV:role/DeployMaster --profile $AWS_PROFILE_NAME
             aws configure set source_profile default --profile $AWS_PROFILE_NAME
             # moving credentials to specific project folder
             mkdir --parents /home/circleci/.aws/bb
@@ -79,7 +79,7 @@ jobs:
             aws configure set output json
 
             # AWS dev awscli profile
-            aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_SHARED:role/DeployMaster --profile $AWS_PROFILE_NAME
+            aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_DEV:role/DeployMaster --profile $AWS_PROFILE_NAME
             aws configure set source_profile default --profile $AWS_PROFILE_NAME
             # moving credentials to specific project folder
             mkdir --parents /home/circleci/.aws/bb
