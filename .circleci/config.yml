@@ -25,7 +25,7 @@ jobs:
 
       - run:
           name: Install awscli
-          command: sudo pip install awscli
+          command: sudo -H pip install awscli
 
       - run:
           name: Configure awscli
@@ -67,7 +67,7 @@ jobs:
 
       - run:
           name: Install awscli
-          command: sudo pip install awscli
+          command: sudo -H pip install awscli
 
       - run:
           name: Configure awscli
