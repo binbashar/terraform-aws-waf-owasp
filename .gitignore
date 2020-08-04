@@ -13,6 +13,7 @@
 !/.gitallowed
 !/.github
 !*.gitkeep
+!*.editorconfig
 
 # SSH keys #
 ############
