@@ -167,7 +167,7 @@ module "waf_regional_test" {
 ### CircleCi PR auto-release job
 
 <div align="left">
-  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-owasp/master/figures/circleci.png" 
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/circleci.png" 
   alt="circleci" width="130"/>
 </div>
 
