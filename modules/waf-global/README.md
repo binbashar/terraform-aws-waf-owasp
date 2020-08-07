@@ -1,8 +1,10 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png" alt="drawing" width="350"/>
+    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png" 
+    alt="drawing" width="250"/>
 </div>
 <div align="right">
-  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png" alt="leverage" width="230"/>
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png" alt="leverage" 
+  width="130"/>
 </div>
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
