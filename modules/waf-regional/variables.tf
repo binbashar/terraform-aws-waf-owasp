@@ -51,6 +51,12 @@ variable rule_admin_access_action_type {
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
+variable rule_admin_path_constraints {
+  type        = list(object({target_string=string, positional_constraint=string}))
+  default     = [{target_string = "/admin", positional_constraint = "STARTS_WITH"}]
+  description = "Customize which paths are considered to be admin paths."
+}
+
 variable rule_php_insecurities_action_type {
   type        = string
   default     = "COUNT"
