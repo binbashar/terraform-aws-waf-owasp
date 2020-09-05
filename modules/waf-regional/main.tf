@@ -134,23 +134,22 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
     type     = "REGULAR"
   }
 
-  # Logging configuration when there are no redacted fields.
+  # Logging configuration
   dynamic logging_configuration {
-    for_each = var.enable_logging && length(var.log_redacted_fields) == 0 ? [true] : []
+    for_each = var.enable_logging ? [true] : []
 
     content {
       log_destination = var.log_destination_arn
-    }
-  }
 
-  # Logging configuration when there are redacted fields.
-  dynamic logging_configuration {
-    for_each = var.enable_logging && length(var.log_redacted_fields) > 0 ? [true] : []
+      dynamic redacted_fields {
+        for_each = var.log_redacted_fields
 
-    content {
-      log_destination = var.log_destination_arn
-      redacted_fields {
-        field_to_match = var.log_redacted_fields
+        content {
+          field_to_match {
+            type = redacted_fields.value.type
+            data = redacted_fields.value.data
+          }
+        }
       }
     }
   }
