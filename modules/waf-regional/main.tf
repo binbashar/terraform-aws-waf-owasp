@@ -136,7 +136,7 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
 
   # Logging configuration when there are no redacted fields.
   dynamic logging_configuration {
-    for_each = var.enable_logging && length(var.log_redacted_fields == 0) ? [true] : []
+    for_each = var.enable_logging && length(var.log_redacted_fields) == 0 ? [true] : []
 
     content {
       log_destination = var.log_destination_arn
@@ -145,7 +145,7 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
 
   # Logging configuration when there are redacted fields.
   dynamic logging_configuration {
-    for_each = var.enable_logging && length(var.log_redacted_fields > 0) ? [true] : []
+    for_each = var.enable_logging && length(var.log_redacted_fields) > 0 ? [true] : []
 
     content {
       log_destination = var.log_destination_arn
