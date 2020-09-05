@@ -134,13 +134,26 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
     type     = "REGULAR"
   }
 
-  #
-  # If you want to send WAF logs to Kinesis Firehose "
-  # UNCOMMENT block below to allow it
-  #
-  #logging_configuration {
-  #  log_destination = var.log_destination_arn
-  #}
+  # Logging configuration when there are no redacted fields.
+  dynamic logging_configuration {
+    for_each = var.enable_logging && length(var.log_redacted_fields == 0) ? [true] : []
+
+    content {
+      log_destination = var.log_destination_arn
+    }
+  }
+
+  # Logging configuration when there are redacted fields.
+  dynamic logging_configuration {
+    for_each = var.enable_logging && length(var.log_redacted_fields > 0) ? [true] : []
+
+    content {
+      log_destination = var.log_destination_arn
+      redacted_fields {
+        field_to_match = var.log_redacted_fields
+      }
+    }
+  }
 
   tags = var.tags
 }

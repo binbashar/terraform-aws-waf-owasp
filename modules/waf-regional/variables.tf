@@ -93,9 +93,21 @@ variable rule_blacklisted_ips_action_type {
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
+variable enable_logging {
+  type        = bool
+  default     = false
+  description = "Enables logging for the WAF"
+}
+
 variable log_destination_arn {
   type        = string
   default     = ""
+  description = "Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream"
+}
+
+variable log_redacted_fields {
+  type        = list(object({type=string, data=string}))
+  default     = []
   description = "Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream"
 }
 
