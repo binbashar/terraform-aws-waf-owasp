@@ -75,6 +75,18 @@ variable rule_csrf_action_type {
   description = "Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing)"
 }
 
+variable rule_csrf_exclude_methods {
+  type        = list(string)
+  default     = ["get", "head", "options"]
+  description = "HTTP methods to exclude from CSRF checks (if using include, leave this empty)"
+}
+
+variable rule_csrf_include_methods {
+  type        = list(string)
+  default     = []
+  description = "HTTP methods to include in CSRF checks (if using exclude, leave this empty)"
+}
+
 variable rule_csrf_header {
   type        = string
   description = "The name of your CSRF token header."

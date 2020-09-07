@@ -7,10 +7,22 @@ resource "aws_wafregional_rule" "enforce_csrf" {
   name        = "${var.waf_prefix}-generic-enforce-csrf"
   metric_name = replace("${var.waf_prefix}genericenforcecsrf", "/[^0-9A-Za-z]/", "")
 
-  predicate {
-    data_id = aws_wafregional_byte_match_set.match_csrf_method.id
-    negated = false
-    type    = "ByteMatch"
+  dynamic predicate {
+    for_each = var.rule_csrf_exclude_methods
+    content {
+      data_id = aws_wafregional_byte_match_set.exclude_csrf_method[predicate.key].id
+      negated = true
+      type    = "ByteMatch"
+    }
+  }
+
+  dynamic predicate {
+    for_each = var.rule_csrf_include_methods
+    content {
+      data_id = aws_wafregional_byte_match_set.include_csrf_method[predicate.key].id
+      negated = false
+      type = "ByteMatch"
+    }
   }
 
   predicate {
@@ -20,12 +32,28 @@ resource "aws_wafregional_rule" "enforce_csrf" {
   }
 }
 
-resource "aws_wafregional_byte_match_set" "match_csrf_method" {
-  name = "${var.waf_prefix}-generic-match-csrf-method"
+resource "aws_wafregional_byte_match_set" "exclude_csrf_method" {
+  for_each = var.rule_csrf_exclude_methods
+  name = "${var.waf_prefix}-generic-exclude-csrf-method-${each.value}"
 
   byte_match_tuples {
     text_transformation   = "LOWERCASE"
-    target_string         = "post"
+    target_string         = each.value
+    positional_constraint = "EXACTLY"
+
+    field_to_match {
+      type = "METHOD"
+    }
+  }
+}
+
+resource "aws_wafregional_byte_match_set" "include_csrf_method" {
+  for_each = var.rule_csrf_include_methods
+  name = "${var.waf_prefix}-generic-include-csrf-method-${each.value}"
+
+  byte_match_tuples {
+    text_transformation   = "LOWERCASE"
+    target_string         = each.value
     positional_constraint = "EXACTLY"
 
     field_to_match {
