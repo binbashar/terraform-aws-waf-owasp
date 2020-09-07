@@ -64,7 +64,7 @@ resource "aws_wafregional_size_constraint_set" "csrf_token_set" {
 resource "aws_wafregional_byte_match_set" "csrf_fetch_same_site" {
   name = "${var.waf_prefix}-generic-match-fetch-same-site"
 
-  size_constraints {
+  byte_match_tuples {
     text_transformation   = "LOWERCASE"
     target_string         = "same-site"
     positional_constraint = "EXACTLY"
@@ -79,7 +79,7 @@ resource "aws_wafregional_byte_match_set" "csrf_fetch_same_site" {
 resource "aws_wafregional_byte_match_set" "csrf_fetch_same_origin" {
   name = "${var.waf_prefix}-generic-match-fetch-same-origin"
 
-  size_constraints {
+  byte_match_tuples {
     text_transformation   = "LOWERCASE"
     target_string         = "same-origin"
     positional_constraint = "EXACTLY"
