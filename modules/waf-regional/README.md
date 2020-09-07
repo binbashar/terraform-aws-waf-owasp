@@ -65,6 +65,7 @@ References
 | blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | log\_destination\_arn | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
 | rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| rule\_admin\_path\_constraints | Customize which paths are considered to be admin paths. | `list(object({target_string=string, positional_constraint=string}))` | `[{target_string = "/admin", positional_constraint = "STARTS_WITH"}]` | no |
 | rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |

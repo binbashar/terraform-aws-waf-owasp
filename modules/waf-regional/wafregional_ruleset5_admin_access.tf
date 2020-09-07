@@ -36,14 +36,17 @@ resource aws_wafregional_ipset admin_remote_ipset {
 resource "aws_wafregional_byte_match_set" "match_admin_url" {
   name = "${var.waf_prefix}-generic-match-admin-url"
 
-  byte_match_tuples {
-    text_transformation   = "URL_DECODE"
-    target_string         = "/admin"
-    positional_constraint = "STARTS_WITH"
+  dynamic byte_match_tuples {
+    for_each = var.rule_admin_path_constraints
 
-    field_to_match {
-      type = "URI"
+    content {
+      text_transformation   = "URL_DECODE"
+      target_string         = byte_match_tuples.value.target_string
+      positional_constraint = byte_match_tuples.value.positional_constraint
+
+      field_to_match {
+        type = "URI"
+      }
     }
   }
 }
-
