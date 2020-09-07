@@ -18,6 +18,18 @@ resource "aws_wafregional_rule" "enforce_csrf" {
     negated = true
     type    = "SizeConstraint"
   }
+
+  predicate {
+    data_id = aws_wafregional_byte_match_set.csrf_fetch_same_site.id
+    negated = true
+    type    = "ByteMatch"
+  }
+
+  predicate {
+    data_id = aws_wafregional_byte_match_set.csrf_fetch_same_origin.id
+    negated = true
+    type    = "ByteMatch"
+  }
 }
 
 resource "aws_wafregional_byte_match_set" "match_csrf_method" {
@@ -49,3 +61,32 @@ resource "aws_wafregional_size_constraint_set" "csrf_token_set" {
   }
 }
 
+resource "aws_wafregional_byte_match_set" "csrf_fetch_same_site" {
+  name = "${var.waf_prefix}-generic-match-fetch-same-site"
+
+  size_constraints {
+    text_transformation   = "LOWERCASE"
+    target_string         = "same-site"
+    positional_constraint = "EXACTLY"
+
+    field_to_match {
+      type = "HEADER"
+      data = "sec-fetch-site"
+    }
+  }
+}
+
+resource "aws_wafregional_byte_match_set" "csrf_fetch_same_origin" {
+  name = "${var.waf_prefix}-generic-match-fetch-same-origin"
+
+  size_constraints {
+    text_transformation   = "LOWERCASE"
+    target_string         = "same-origin"
+    positional_constraint = "EXACTLY"
+
+    field_to_match {
+      type = "HEADER"
+      data = "sec-fetch-site"
+    }
+  }
+}
