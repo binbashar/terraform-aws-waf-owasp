@@ -10,7 +10,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
   dynamic predicate {
     for_each = var.rule_csrf_exclude_methods
     content {
-      data_id = aws_wafregional_byte_match_set.exclude_csrf_method[predicate.key].id
+      data_id = aws_wafregional_byte_match_set.exclude_csrf_method[predicate.value].id
       negated = true
       type    = "ByteMatch"
     }
@@ -19,7 +19,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
   dynamic predicate {
     for_each = var.rule_csrf_include_methods
     content {
-      data_id = aws_wafregional_byte_match_set.include_csrf_method[predicate.key].id
+      data_id = aws_wafregional_byte_match_set.include_csrf_method[predicate.value].id
       negated = false
       type = "ByteMatch"
     }
