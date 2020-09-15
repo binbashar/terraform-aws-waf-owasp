@@ -1,5 +1,7 @@
 .PHONY: help
-SHELL := /bin/bash
+SHELL         := /bin/bash
+MAKEFILE_PATH := ./Makefile
+MAKEFILES_DIR := ./@bin/makefiles
 
 PROJECT_SHORT                    := bb
 
@@ -33,6 +35,23 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf " - \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 #==============================================================#
+# INITIALIZATION                                               #
+#==============================================================#
+init-makefiles: ## initialize makefiles
+	rm -rf ${MAKEFILES_DIR}
+	mkdir -p ${MAKEFILES_DIR}
+	git clone https://github.com/binbashar/le-dev-makefiles.git ${MAKEFILES_DIR}
+	echo "" >> ${MAKEFILE_PATH}
+	sed -i '/^#include.*/s/^#//' ${MAKEFILE_PATH}
+
+#
+## IMPORTANT: Automatically managed
+## Must NOT UNCOMMENT the #include lines below
+#
+#include ${MAKEFILES_DIR}/circleci/circleci.mk
+#include ${MAKEFILES_DIR}/release-mgmt/release.mk
+
+#==============================================================#
 # TERRAFORM                                                    #
 #==============================================================#
 version: ## Show terraform version
@@ -64,9 +83,3 @@ tflint-deep: ## TFLint is a Terraform linter for detecting errors that can not b
 	--aws-profile=${LOCAL_OS_AWS_PROFILE} \
 	--aws-creds-file=/root/.aws/credentials \
 	--aws-region=${LOCAL_OS_AWS_REGION}
-
-#==============================================================#
-# CIRCLECI                                                     #
-#==============================================================#
-circleci-validate-config: ## Validate A CircleCI Config (https://circleci.com/docs/2.0/local-cli/)
-	circleci config validate .circleci/config.yml
