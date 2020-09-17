@@ -55,17 +55,32 @@ References
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.28 |
+| aws | >= 2.70.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.70.0 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
 | admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | alb\_arn | List of ALB ARNs | `list(string)` | `[]` | no |
 | blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| enable\_logging | Enables logging for the WAF | `bool` | `false` | no |
 | log\_destination\_arn | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
+| log\_redacted\_fields | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `list(object({ type = string, data = string }))` | `[]` | no |
 | rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_admin\_path\_constraints | Customize which paths are considered to be admin paths. | `list(object({target_string=string, positional_constraint=string}))` | `[{target_string = "/admin", positional_constraint = "STARTS_WITH"}]` | no |
+| rule\_admin\_path\_constraints | Customize which paths are considered to be admin paths. | `list(object({ target_string = string, positional_constraint = string }))` | <pre>[<br>  {<br>    "positional_constraint": "STARTS_WITH",<br>    "target_string": "/admin"<br>  }<br>]</pre> | no |
 | rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |

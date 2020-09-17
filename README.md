@@ -66,35 +66,67 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
+## Pre-Requirements
+
+In order to get the full automated potential of the
+[Binbash Leverage DevOps Automation Code Library](https://leverage.binbash.com.ar/how-it-works/code-library/code-library/)  
+you should initialize all the necessary helper **Makefiles**. 
+
+#### How? 
+You must execute the `make init-makefiles` command  at the corresponding context, which could be:
+ 
+- Root context
+    - `/` 
+- Module specific contexts 
+    - `/modules/waf-global/`
+    - `/modules/waf-regional`
+     
+```shell
+╭─delivery at delivery-I7567 in ~/terraform/terraform-aws-waf-owasp on master✔ 20-09-17
+╰─⠠⠵ make
+Available Commands:
+ - init-makefiles     initialize makefiles
+
+``` 
+
+### Why? 
+You'll get all the necessary commands to automatically operate this module via a dockerized approach, 
+example shown below
+
+```shell
+╭─delivery at delivery-I7567 in ~/terraform/terraform-aws-waf-owasp on master✔ 20-09-17
+╰─⠠⠵ make
+Available Commands:
+ - circleci-validate-config  ## Validate A CircleCI Config (https
+ - format-check        ## The terraform fmt is used to rewrite tf conf files to a canonical format and style.
+ - format              ## The terraform fmt is used to rewrite tf conf files to a canonical format and style.
+ - tf-dir-chmod        ## run chown in ./.terraform to gran that the docker mounted dir has the right permissions
+ - version             ## Show terraform version
+ - init-makefiles      ## initialize makefiles
+``` 
+
+```shell
+╭─delivery at delivery-I7567 in ~/terraform/terraform-aws-waf-owasp on master✔ 20-09-17
+╰─⠠⠵ make format-check 
+docker run --rm -v /home/delivery/Binbash/repos/Leverage/terraform/terraform-aws-waf-owasp:"/go/src/project/":rw -v :/config -v /common.config:/common-config/common.config -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/etc/gitconfig -v ~/.aws/bb:/root/.aws/bb -e AWS_SHARED_CREDENTIALS_FILE=/root/.aws/bb/credentials -e AWS_CONFIG_FILE=/root/.aws/bb/config --entrypoint=/bin/terraform -w "/go/src/project/" -it binbash/terraform-awscli-slim:0.12.28 fmt -check
+```
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.28 |
+| aws | >= 2.70.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.70.0 |
 
 ## Parameters are almost synced in both waf-regional and waf-global modules
-### Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| tags | A mapping of tags to assign to all resources | map | `<map>` | no |
-| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
-
-### Outputs
-
-| Name | Description |
-|------|-------------|
-| web\_acl\_id | AWS WAF web acl id. |
-| web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
-| web\_acl\_name | The name or description of the web ACL. |
-
+- [waf-global-parameters](./modules/waf-global/README.md)
+- [waf-regional-parameters](./modules/waf-regional/README.md)
 
 ## Examples
 ### waf-regional
