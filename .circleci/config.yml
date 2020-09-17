@@ -36,8 +36,6 @@ jobs:
       - run:
           name: Configure awscli
           command: |
-            sudo chown -R $USER:$USER /home/circleci/.aws
-
             # AWS defautl awscli profile
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
@@ -72,12 +70,6 @@ jobs:
           command: pwd && ls -ltra && git branch
 
       - run:
-          name: Initialize Repo Makefiles
-          command: |
-            make init-makefiles
-            git update-index --assume-unchanged "Makefile"
-
-      - run:
           name: Install awscli
           command: sudo -H pip install awscli
 
@@ -103,12 +95,24 @@ jobs:
           command: aws ec2 describe-instances --region us-east-1 --profile $AWS_PROFILE_NAME
 
       - run:
+          name: Initialize Repo Makefiles
+          command: |
+            cd modules/waf-global && make init-makefiles
+            git update-index --assume-unchanged "Makefile"
+
+      - run:
           name: test3-terratests-dep-init
           command: cd modules/waf-global && make terratest-dep-init
 
       - run:
           name: test3-terratests-go-test
           command: cd modules/waf-global && make terratest-go-test
+
+      - run:
+          name: Initialize Repo Makefiles
+          command: |
+            cd modules/waf-regional && make init-makefiles
+            git update-index --assume-unchanged "Makefile"
 
       - run:
           name: test4-terratests-dep-init
