@@ -79,8 +79,17 @@ Thumbs.db
 *.pgpass
 *.vagrant
 
-# TF Project files #
+# Project files #
 ####################
+#
+# Secret Files
+#
+*secrets.dec.*
+#
+# Scripts and Makefiles
+#
+/@bin
+!/@bin/scripts
 #
 # Compiled files
 #

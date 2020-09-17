@@ -20,6 +20,12 @@ jobs:
           command: pwd && ls -ltra && git branch
 
       - run:
+          name: Initialize Repo Makefiles
+          command: |
+            make init-makefiles
+            git update-index --assume-unchanged "Makefile"
+
+      - run:
           name: test1-terraform-format
           command: make format-check
 
@@ -64,6 +70,12 @@ jobs:
       - run:
           name: Context Info Cmds
           command: pwd && ls -ltra && git branch
+
+      - run:
+          name: Initialize Repo Makefiles
+          command: |
+            make init-makefiles
+            git update-index --assume-unchanged "Makefile"
 
       - run:
           name: Install awscli

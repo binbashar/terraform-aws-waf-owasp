@@ -55,10 +55,23 @@ References
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.28 |
+| aws | >= 2.70.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.70.0 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
 | admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |

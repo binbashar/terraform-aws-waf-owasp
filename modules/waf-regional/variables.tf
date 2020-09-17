@@ -52,8 +52,8 @@ variable rule_admin_access_action_type {
 }
 
 variable rule_admin_path_constraints {
-  type        = list(object({target_string=string, positional_constraint=string}))
-  default     = [{target_string = "/admin", positional_constraint = "STARTS_WITH"}]
+  type        = list(object({ target_string = string, positional_constraint = string }))
+  default     = [{ target_string = "/admin", positional_constraint = "STARTS_WITH" }]
   description = "Customize which paths are considered to be admin paths."
 }
 
@@ -106,7 +106,7 @@ variable log_destination_arn {
 }
 
 variable log_redacted_fields {
-  type        = list(object({type=string, data=string}))
+  type        = list(object({ type = string, data = string }))
   default     = []
   description = "Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream"
 }

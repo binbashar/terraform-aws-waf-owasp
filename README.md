@@ -66,35 +66,22 @@ References
 * [6] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-rules.html
 * [7] : https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-working-with.html
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.28 |
+| aws | >= 2.70.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.70.0 |
 
 ## Parameters are almost synced in both waf-regional and waf-global modules
-### Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | list(string) | `<list>` | no |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | string | `"COUNT"` | no |
-| tags | A mapping of tags to assign to all resources | map | `<map>` | no |
-| waf\_prefix | Prefix to use when naming resources | string | n/a | yes |
-
-### Outputs
-
-| Name | Description |
-|------|-------------|
-| web\_acl\_id | AWS WAF web acl id. |
-| web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
-| web\_acl\_name | The name or description of the web ACL. |
-
+- [waf-global-parameters](./modules/waf-global/README.md)
+- [waf-regional-parameters](./modules/waf-regional/README.md)
 
 ## Examples
 ### waf-regional
