@@ -47,6 +47,7 @@ jobs:
             aws configure set source_profile default --profile $AWS_PROFILE_NAME
             # moving credentials to specific project folder
             mkdir --parents /home/circleci/.aws/bb
+            sudo chown -R $USER:$USER /home/circleci/.aws
             cp /home/circleci/.aws/credentials /home/circleci/.aws/bb/credentials
             cp /home/circleci/.aws/config /home/circleci/.aws/bb/config
 
