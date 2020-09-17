@@ -36,6 +36,10 @@ jobs:
       - run:
           name: Configure awscli
           command: |
+            # AWS credentials dir
+            mkdir --parents /home/circleci/.aws/bb
+            sudo chown -R $USER:$USER /home/circleci/.aws
+
             # AWS defautl awscli profile
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
@@ -45,9 +49,8 @@ jobs:
             # AWS dev awscli profile
             aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_DEV:role/DeployMaster --profile $AWS_PROFILE_NAME
             aws configure set source_profile default --profile $AWS_PROFILE_NAME
-            # moving credentials to specific project folder
-            mkdir --parents /home/circleci/.aws/bb
-            sudo chown -R $USER:$USER /home/circleci/.aws
+
+            # moving AWS credentials to specific project folder
             cp /home/circleci/.aws/credentials /home/circleci/.aws/bb/credentials
             cp /home/circleci/.aws/config /home/circleci/.aws/bb/config
 
