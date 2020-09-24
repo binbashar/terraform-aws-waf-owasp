@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v1.0.13"></a>
+## [v1.0.13] - 2020-09-24
+
+- BBL-381 | upgrading circleci VM executor
+
+
 <a name="v1.0.12"></a>
 ## [v1.0.12] - 2020-09-17
 
@@ -203,7 +209,8 @@ All notable changes to this project will be documented in this file.
 - Initial Commit terraform-aws-waf-owasp module
 
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.12...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.13...HEAD
+[v1.0.13]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.12...v1.0.13
 [v1.0.12]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.11...v1.0.12
 [v1.0.11]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.10...v1.0.11
 [v1.0.10]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.9...v1.0.10
