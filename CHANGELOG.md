@@ -7,6 +7,15 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v1.0.14"></a>
+## [v1.0.14] - 2020-11-16
+
+- BBL-440 | adding terraform include at root context makefile to allow make tflint-deep during ci
+- BBL-440 | fixing modules makefile-lib path
+- BBL-440 | fixing modules makefile path
+- BBL-440 | ci pre-commit integrated + circleci slack notif + versioned makefile added
+
+
 <a name="v1.0.13"></a>
 ## [v1.0.13] - 2020-09-24
 
@@ -209,7 +218,8 @@ All notable changes to this project will be documented in this file.
 - Initial Commit terraform-aws-waf-owasp module
 
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.13...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.14...HEAD
+[v1.0.14]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.13...v1.0.14
 [v1.0.13]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.12...v1.0.13
 [v1.0.12]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.11...v1.0.12
 [v1.0.11]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.10...v1.0.11
