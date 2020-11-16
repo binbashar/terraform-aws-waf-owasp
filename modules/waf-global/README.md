@@ -1,9 +1,9 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png" 
+    <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash.png"
     alt="drawing" width="250"/>
 </div>
 <div align="right">
-  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png" alt="leverage" 
+  <img src="https://raw.githubusercontent.com/binbashar/terraform-aws-waf-owasp/master/figures/binbash-leverage-terraform.png" alt="leverage"
   width="130"/>
 </div>
 
@@ -55,6 +55,7 @@ References
 **For more information:**
 * AWS Blog - https://aws.amazon.com/about-aws/whats-new/2017/07/use-aws-waf-to-mitigate-owasps-top-10-web-application-vulnerabilities/
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -72,7 +73,6 @@ References
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
 | admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
@@ -87,6 +87,7 @@ References
 | rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
+| waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
 
 ## Outputs
 
@@ -95,6 +96,8 @@ References
 | web\_acl\_id | AWS WAF web acl id. |
 | web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
 | web\_acl\_name | The name or description of the web ACL. |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Examples
 ### waf-global

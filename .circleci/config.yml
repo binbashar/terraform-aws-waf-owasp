@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   #
-  # Test 1 & Test 2
+  # Automated Tests
   #
   test-static-code-and-linting:
     machine:
@@ -26,8 +26,27 @@ jobs:
             git update-index --assume-unchanged "Makefile"
 
       - run:
-          name: test1-terraform-format
-          command: make format-check
+          name: test-terraform-format-and-docs
+          command: |
+            #
+            # Install pre-commit
+            pip install pre-commit
+            #
+            # Install terraform
+            sudo apt-get install unzip
+            wget https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip
+            unzip terraform_${TERRAFORM_VER}_linux_amd64.zip
+            sudo mv terraform /usr/local/bin/
+            terraform --version
+            #
+            # Install terraform-docs
+            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.10.1/terraform-docs-v0.10.1-$(uname | tr '[:upper:]' '[:lower:]')-amd64
+            chmod +x ./terraform-docs
+            sudo mv ./terraform-docs /usr/local/bin/terraform-docs
+            #
+            # Run tests
+            make pre-commit
 
       - run:
           name: Install awscli
@@ -50,16 +69,86 @@ jobs:
             aws configure set role_arn arn:aws:iam::$AWS_ACCOUNT_ID_DEV:role/DeployMaster --profile $AWS_PROFILE_NAME
             aws configure set source_profile default --profile $AWS_PROFILE_NAME
 
-            # moving AWS credentials to specific project folder
+            # moving credentials to specific project folder
             cp /home/circleci/.aws/credentials /home/circleci/.aws/bb/credentials
             cp /home/circleci/.aws/config /home/circleci/.aws/bb/config
 
       - run:
-          name: test2-terraform-linting
+          name: test-terraform-linting
           command: make tflint-deep
 
+      - slack/notify:
+          event: fail
+          mentions: '@leverage-support'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Failed Pipeline! :rotating_light::fire::bash-fire::bangbang::video-games-doom-mad::stopp:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":negative_squared_cross_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *User*: $CIRCLE_USERNAME \n :negative_squared_cross_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *Branch:* $CIRCLE_BRANCH \n :negative_squared_cross_mark: *PR:* $CIRCLE_PULL_REQUEST \n :negative_squared_cross_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Successful Pipeline! :checkered_flag: :video-games-star: :video-games-mario-luigi-dance: :tada: :binbash::bb-leverage: :heart: :open-source:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":heavy_check_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *User*: $CIRCLE_USERNAME \n :heavy_check_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *Branch:* $CIRCLE_BRANCH \n :heavy_check_mark: *PR:* $CIRCLE_PULL_REQUEST \n :heavy_check_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
+
   #
-  # Test 3
+  # Tests E2E
   #
   test-e2e-terratests:
     machine:
@@ -72,6 +161,12 @@ jobs:
       - run:
           name: Context Info Cmds
           command: pwd && ls -ltra && git branch
+
+      - run:
+          name: Initialize Repo Makefiles
+          command: |
+            make init-makefiles
+            git update-index --assume-unchanged "Makefile"
 
       - run:
           name: Install awscli
@@ -99,32 +194,90 @@ jobs:
           command: aws ec2 describe-instances --region us-east-1 --profile $AWS_PROFILE_NAME
 
       - run:
-          name: Initialize Repo Makefiles
-          command: |
-            cd modules/waf-global && make init-makefiles
-            git update-index --assume-unchanged "Makefile"
-
-      - run:
-          name: test3-terratests-dep-init
+          name: test-terratests-dep-init-waf-global-mod
           command: cd modules/waf-global && make terratest-dep-init
 
       - run:
-          name: test3-terratests-go-test
+          name: test-terratests-go-test-waf-global-mod
           command: cd modules/waf-global && make terratest-go-test
 
       - run:
-          name: Initialize Repo Makefiles
-          command: |
-            cd modules/waf-regional && make init-makefiles
-            git update-index --assume-unchanged "Makefile"
-
-      - run:
-          name: test4-terratests-dep-init
+          name: test-terratests-dep-init-waf-regional-mod
           command: cd modules/waf-regional && make terratest-dep-init
 
       - run:
-          name: test4-terratests-go-test
+          name: test-terratests-go-test-waf-regional-mod
           command: cd modules/waf-regional && make terratest-go-test
+
+      - slack/notify:
+          event: fail
+          mentions: '@leverage-support'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Failed Pipeline! :rotating_light::fire::bash-fire::bangbang::video-games-doom-mad::stopp:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":negative_squared_cross_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *User*: $CIRCLE_USERNAME \n :negative_squared_cross_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *Branch:* $CIRCLE_BRANCH \n :negative_squared_cross_mark: *PR:* $CIRCLE_PULL_REQUEST \n :negative_squared_cross_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Successful Pipeline! :checkered_flag: :video-games-star: :video-games-mario-luigi-dance: :tada: :binbash::bb-leverage: :heart: :open-source:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":heavy_check_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *User*: $CIRCLE_USERNAME \n :heavy_check_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *Branch:* $CIRCLE_BRANCH \n :heavy_check_mark: *PR:* $CIRCLE_PULL_REQUEST \n :heavy_check_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
 
   #
   # Release
@@ -168,6 +321,84 @@ jobs:
               echo "==============================================================================================="
             fi
 
+      - slack/notify:
+          event: fail
+          mentions: '@leverage-support'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Failed Pipeline! :rotating_light::fire::bash-fire::bangbang::video-games-doom-mad::stopp:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":negative_squared_cross_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *User*: $CIRCLE_USERNAME \n :negative_squared_cross_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :negative_squared_cross_mark: *Branch:* $CIRCLE_BRANCH \n :negative_squared_cross_mark: *PR:* $CIRCLE_PULL_REQUEST \n :negative_squared_cross_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Successful Pipeline! :checkered_flag: :video-games-star: :video-games-mario-luigi-dance: :tada: :binbash::bb-leverage: :heart: :open-source:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":heavy_check_mark: *Project*: $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *User*: $CIRCLE_USERNAME \n :heavy_check_mark: *Job*: $CIRCLE_JOB in *repo* $CIRCLE_PROJECT_REPONAME \n :heavy_check_mark: *Branch:* $CIRCLE_BRANCH \n :heavy_check_mark: *PR:* $CIRCLE_PULL_REQUEST \n :heavy_check_mark: *Last Commit:* $CIRCLE_SHA1"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": ":arrow_forward: View Job in CircleCi",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "$CIRCLE_BUILD_URL",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+          channel: 'tools-ci'
+
+#
+# CircleCI orbs are open-source, shareable packages of parameterizable reusable
+# configuration elements, including jobs, commands, and executors.
+#
+orbs:
+  sumologic: circleci/sumologic@1.0.6
+  slack: circleci/slack@4.1.1
+
 #
 # Jobs workflow
 #
@@ -193,3 +424,5 @@ workflows:
             branches:
              only: # only branches matching the below regex filters will run
                - master
+      - sumologic/workflow-collector:
+          context: binbashar-org-global-context

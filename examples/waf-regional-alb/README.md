@@ -60,7 +60,7 @@ module "waf_regional_test" {
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345111",
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1244/12345222"
     ]
-    
+
     # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
     rule_size_restriction_action_type   = "COUNT"
     rule_sqli_action                    = "COUNT"
