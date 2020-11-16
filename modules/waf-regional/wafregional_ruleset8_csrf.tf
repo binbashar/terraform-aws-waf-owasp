@@ -21,7 +21,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
     content {
       data_id = aws_wafregional_byte_match_set.include_csrf_method[predicate.value].id
       negated = false
-      type = "ByteMatch"
+      type    = "ByteMatch"
     }
   }
 
@@ -46,7 +46,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
 
 resource "aws_wafregional_byte_match_set" "exclude_csrf_method" {
   for_each = toset(var.rule_csrf_exclude_methods)
-  name = "${var.waf_prefix}-generic-exclude-csrf-method-${each.value}"
+  name     = "${var.waf_prefix}-generic-exclude-csrf-method-${each.value}"
 
   byte_match_tuples {
     text_transformation   = "LOWERCASE"
@@ -61,7 +61,7 @@ resource "aws_wafregional_byte_match_set" "exclude_csrf_method" {
 
 resource "aws_wafregional_byte_match_set" "include_csrf_method" {
   for_each = toset(var.rule_csrf_include_methods)
-  name = "${var.waf_prefix}-generic-include-csrf-method-${each.value}"
+  name     = "${var.waf_prefix}-generic-include-csrf-method-${each.value}"
 
   byte_match_tuples {
     text_transformation   = "LOWERCASE"

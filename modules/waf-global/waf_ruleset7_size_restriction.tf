@@ -24,7 +24,7 @@ resource aws_waf_size_constraint_set size_restrictions {
   #   text_transformation = "NONE"
   #   comparison_operator = "GT"
   #   size                = "4096"
-  # 
+  #
   #   field_to_match {
   #     type = "BODY"
   #   }

@@ -105,7 +105,7 @@ TestAwsWaf 2019-10-31T18:46:57Z command.go:158: module.waf_global_test.aws_waf_b
 TestAwsWaf 2019-10-31T18:46:59Z command.go:158: module.waf_global_test.aws_waf_xss_match_set.xss_match_set: Still destroying... [id=12dfaa5e-b175-4625-88a1-769794255b66, 20s elapsed]
 TestAwsWaf 2019-10-31T18:47:02Z command.go:158: module.waf_global_test.aws_waf_byte_match_set.match_ssi: Destruction complete after 28s
 TestAwsWaf 2019-10-31T18:47:04Z command.go:158: module.waf_global_test.aws_waf_xss_match_set.xss_match_set: Destruction complete after 26s
-TestAwsWaf 2019-10-31T18:47:04Z command.go:158: 
+TestAwsWaf 2019-10-31T18:47:04Z command.go:158:
 TestAwsWaf 2019-10-31T18:47:04Z command.go:158: Destroy complete! Resources: 24 destroyed.
 PASS
 ok      project/tests   271.951s

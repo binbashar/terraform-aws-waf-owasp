@@ -110,7 +110,7 @@ TestAwsWaf 2019-10-31T19:03:14Z command.go:158: module.waf_regional_test.aws_waf
 TestAwsWaf 2019-10-31T19:03:16Z command.go:158: module.waf_regional_test.aws_wafregional_byte_match_set.match_php_insecure_var_refs: Still destroying... [id=699f7f9a-c50b-401c-8dd4-f6682a98a76d, 20s elapsed]
 TestAwsWaf 2019-10-31T19:03:19Z command.go:158: module.waf_regional_test.aws_wafregional_byte_match_set.match_php_insecure_uri: Destruction complete after 38s
 TestAwsWaf 2019-10-31T19:03:21Z command.go:158: module.waf_regional_test.aws_wafregional_byte_match_set.match_php_insecure_var_refs: Destruction complete after 24s
-TestAwsWaf 2019-10-31T19:03:21Z command.go:158: 
+TestAwsWaf 2019-10-31T19:03:21Z command.go:158:
 TestAwsWaf 2019-10-31T19:03:21Z command.go:158: Destroy complete! Resources: 24 destroyed.
 PASS
 ok      project/tests   234.458s

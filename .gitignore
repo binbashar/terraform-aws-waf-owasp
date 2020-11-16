@@ -8,17 +8,20 @@
 !*.circleci
 !*.dockeringnore
 !*.hosts
-!/.gitignore
+!.hosts.example
+!*.gitignore
 !/.chglog
 !/.gitallowed
 !/.github
 !*.gitkeep
 !*.editorconfig
+!*.pre-commit-config.yaml
 
 # SSH keys #
 ############
 id_rsa
 id_dsa
+keys/
 
 # OS generated files #
 ######################
