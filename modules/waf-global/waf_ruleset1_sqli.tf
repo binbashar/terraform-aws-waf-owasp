@@ -18,7 +18,7 @@ resource aws_waf_sql_injection_match_set sql_injection_match_set {
   name = "${var.waf_prefix}-generic-detect-sqli"
   
   lifecycle {
-    ignore_changes = [ all ]
+    ignore_changes =  all 
   }
 
   sql_injection_match_tuples {
