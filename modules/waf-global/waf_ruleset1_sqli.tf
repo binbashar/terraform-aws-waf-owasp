@@ -16,6 +16,10 @@ resource aws_waf_rule mitigate_sqli {
 
 resource aws_waf_sql_injection_match_set sql_injection_match_set {
   name = "${var.waf_prefix}-generic-detect-sqli"
+  
+  lifecycle {
+    ignore_changes = true
+  }
 
   sql_injection_match_tuples {
     text_transformation = "HTML_ENTITY_DECODE"
