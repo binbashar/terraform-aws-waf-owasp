@@ -18,6 +18,7 @@ resource aws_waf_rule detect_php_insecure {
     negated = false
     type    = "ByteMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_byte_match_set match_php_insecure_uri {

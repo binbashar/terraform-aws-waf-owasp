@@ -12,6 +12,7 @@ resource aws_waf_rule detect_blacklisted_ips {
     negated = false
     type    = "IPMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_ipset blacklisted_ips {

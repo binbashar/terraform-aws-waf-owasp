@@ -12,6 +12,7 @@ resource aws_waf_rule mitigate_sqli {
     negated = false
     type    = "SqlInjectionMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_sql_injection_match_set sql_injection_match_set {

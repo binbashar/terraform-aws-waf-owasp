@@ -12,6 +12,7 @@ resource aws_waf_rule mitigate_xss {
     negated = false
     type    = "XssMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_xss_match_set xss_match_set {

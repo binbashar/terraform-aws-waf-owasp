@@ -12,6 +12,7 @@ resource aws_waf_rule detect_ssi {
     negated = false
     type    = "ByteMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_byte_match_set match_ssi {

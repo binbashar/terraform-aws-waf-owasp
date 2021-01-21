@@ -13,6 +13,7 @@ resource aws_waf_rule detect_rfi_lfi_traversal {
     negated = false
     type    = "ByteMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_byte_match_set match_rfi_lfi_traversal {

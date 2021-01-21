@@ -18,6 +18,7 @@ resource aws_waf_rule enforce_csrf {
     negated = true
     type    = "SizeConstraint"
   }
+  tags = var.tags
 }
 
 resource aws_waf_byte_match_set match_csrf_method {

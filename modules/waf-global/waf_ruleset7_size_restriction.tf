@@ -12,6 +12,7 @@ resource aws_waf_rule restrict_sizes {
     negated = false
     type    = "SizeConstraint"
   }
+  tags = var.tags
 }
 
 resource aws_waf_size_constraint_set size_restrictions {

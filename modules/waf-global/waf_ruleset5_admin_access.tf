@@ -19,6 +19,7 @@ resource aws_waf_rule detect_admin_access {
     negated = false
     type    = "ByteMatch"
   }
+  tags = var.tags
 }
 
 resource aws_waf_ipset admin_remote_ipset {
