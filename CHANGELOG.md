@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v1.0.16"></a>
+## [v1.0.16] - 2021-10-08
+
+- Update FUNDING.yml
+
+
 <a name="v1.0.15"></a>
 ## [v1.0.15] - 2021-10-08
 
@@ -224,7 +230,8 @@ All notable changes to this project will be documented in this file.
 - Initial Commit terraform-aws-waf-owasp module
 
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.15...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.16...HEAD
+[v1.0.16]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.15...v1.0.16
 [v1.0.15]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.14...v1.0.15
 [v1.0.14]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.13...v1.0.14
 [v1.0.13]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.12...v1.0.13
