@@ -1,7 +1,7 @@
 #
 # This is our WAF ACL with each rule defined and prioritized accordingly.
 #
-resource aws_waf_web_acl waf_acl {
+resource "aws_waf_web_acl" "waf_acl" {
   name        = "${var.waf_prefix}-generic-owasp-acl"
   metric_name = replace("${var.waf_prefix}genericowaspacl", "/[^0-9A-Za-z]/", "")
 
@@ -34,6 +34,20 @@ resource aws_waf_web_acl waf_acl {
 
     priority = 20
     rule_id  = aws_waf_rule.detect_blacklisted_ips.id
+    type     = "REGULAR"
+  }
+
+  #
+  # Reason: we are not implementing an IP whitelist yet.
+  # So COMMENT rule block below to deactivate this rule
+  #
+  rules {
+    action {
+      type = var.rule_whitelisted_ips_action_type
+    }
+
+    priority = 20
+    rule_id  = aws_waf_rule.detect_whitelisted_ips.id
     type     = "REGULAR"
   }
 
