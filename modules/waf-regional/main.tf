@@ -38,6 +38,20 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
   }
 
   #
+  # Reason: we are not implementing an IP whitelist yet.
+  # So COMMENT rule block below to deactivate this rule
+  #
+  rule {
+    action {
+      type = var.rule_whitelisted_ips_action_type
+    }
+
+    priority = 20
+    rule_id  = aws_wafregional_rule.detect_whitelisted_ips.id
+    type     = "REGULAR"
+  }
+
+  #
   # Reason: the apps do not use auth tokens yet.
   # So COMMENT rule block below to deactivate this rule
   #
@@ -135,13 +149,13 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
   }
 
   # Logging configuration
-  dynamic logging_configuration {
+  dynamic "logging_configuration" {
     for_each = var.enable_logging ? [true] : []
 
     content {
       log_destination = var.log_destination_arn
 
-      dynamic redacted_fields {
+      dynamic "redacted_fields" {
         for_each = var.log_redacted_fields
 
         content {
