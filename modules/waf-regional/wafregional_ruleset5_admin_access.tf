@@ -4,7 +4,7 @@
 ## Restrict access to the admin interface to known source IPs only
 ## Matches the URI prefix, when the remote IP isn't in the whitelist
 
-resource aws_wafregional_rule detect_admin_access {
+resource "aws_wafregional_rule" "detect_admin_access" {
   name        = "${var.waf_prefix}-generic-detect-admin-access"
   metric_name = replace("${var.waf_prefix}genericdetectadminaccess", "/[^0-9A-Za-z]/", "")
 
@@ -21,9 +21,9 @@ resource aws_wafregional_rule detect_admin_access {
   }
 }
 
-resource aws_wafregional_ipset admin_remote_ipset {
+resource "aws_wafregional_ipset" "admin_remote_ipset" {
   name = "${var.waf_prefix}-generic-match-admin-remote-ip"
-  dynamic ip_set_descriptor {
+  dynamic "ip_set_descriptor" {
     for_each = var.admin_remote_ipset
 
     content {
@@ -36,7 +36,7 @@ resource aws_wafregional_ipset admin_remote_ipset {
 resource "aws_wafregional_byte_match_set" "match_admin_url" {
   name = "${var.waf_prefix}-generic-match-admin-url"
 
-  dynamic byte_match_tuples {
+  dynamic "byte_match_tuples" {
     for_each = var.rule_admin_path_constraints
 
     content {
