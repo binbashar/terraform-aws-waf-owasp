@@ -10,20 +10,6 @@ resource "aws_waf_web_acl" "waf_acl" {
   }
 
   #
-  # Note: we are using this but we are not applying body size restrictions because
-  #  uploads could be affected by that.
-  #
-  rules {
-    action {
-      type = var.rule_size_restriction_action_type
-    }
-
-    priority = 10
-    rule_id  = aws_waf_rule.restrict_sizes.id
-    type     = "REGULAR"
-  }
-
-  #
   # Reason: we are not implementing an IP blacklist yet.
   # So COMMENT rule block below to deactivate this rule
   #
@@ -32,7 +18,7 @@ resource "aws_waf_web_acl" "waf_acl" {
       type = var.rule_blacklisted_ips_action_type
     }
 
-    priority = 20
+    priority = 10
     rule_id  = aws_waf_rule.detect_blacklisted_ips.id
     type     = "REGULAR"
   }
@@ -46,8 +32,23 @@ resource "aws_waf_web_acl" "waf_acl" {
       type = var.rule_whitelisted_ips_action_type
     }
 
-    priority = 20
+    priority = 10
     rule_id  = aws_waf_rule.detect_whitelisted_ips.id
+    type     = "REGULAR"
+  }
+
+
+  #
+  # Note: we are using this but we are not applying body size restrictions because
+  #  uploads could be affected by that.
+  #
+  rules {
+    action {
+      type = var.rule_size_restriction_action_type
+    }
+
+    priority = 20
+    rule_id  = aws_waf_rule.restrict_sizes.id
     type     = "REGULAR"
   }
 
