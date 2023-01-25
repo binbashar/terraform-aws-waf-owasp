@@ -6,7 +6,7 @@ jobs:
   #
   test-static-code-and-linting:
     machine:
-      image: ubuntu-1604:202007-01 # Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
+      image: ubuntu-2004:202107-01 # Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 
       # This job has been blocked because Docker Layer Caching is not available on your plan.
       # Should upgrade if necessary.
@@ -26,14 +26,15 @@ jobs:
             git update-index --assume-unchanged "Makefile"
 
       - run:
-          name: test-terraform-format-and-docs
+          name: test-dependencies
           command: |
             #
             # Install pre-commit
-            pip install pre-commit
+            sudo -H pip3 install pre-commit
             #
             # Install terraform
-            sudo apt-get install unzip
+            sudo apt-get install unzip curl
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             wget https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip
             unzip terraform_${TERRAFORM_VER}_linux_amd64.zip
             sudo mv terraform /usr/local/bin/
@@ -41,16 +42,17 @@ jobs:
             #
             # Install terraform-docs
             sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-            curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.10.1/terraform-docs-v0.10.1-$(uname | tr '[:upper:]' '[:lower:]')-amd64
+            curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.12.1/terraform-docs-v0.12.1-$(uname | tr '[:upper:]' '[:lower:]')-amd64
             chmod +x ./terraform-docs
             sudo mv ./terraform-docs /usr/local/bin/terraform-docs
-            #
-            # Run tests
-            make pre-commit
+
+      - run:
+          name: test-terraform-format-and-docs
+          command: make pre-commit
 
       - run:
           name: Install awscli
-          command: sudo -H pip install awscli
+          command: sudo -H pip3 install awscli
 
       - run:
           name: Configure awscli
@@ -152,7 +154,7 @@ jobs:
   #
   test-e2e-terratests:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202107-01
       docker_layer_caching: false
 
     steps:
@@ -170,7 +172,7 @@ jobs:
 
       - run:
           name: Install awscli
-          command: sudo -H pip install awscli
+          command: sudo -H pip3 install awscli
 
       - run:
           name: Configure awscli
@@ -194,20 +196,12 @@ jobs:
           command: aws ec2 describe-instances --region us-east-1 --profile $AWS_PROFILE_NAME
 
       - run:
-          name: test-terratests-dep-init-waf-global-mod
-          command: cd modules/waf-global && make terratest-dep-init
+          name: test-terratests-dep-init
+          command: make terratest-dep-init
 
       - run:
-          name: test-terratests-go-test-waf-global-mod
-          command: cd modules/waf-global && make terratest-go-test
-
-      - run:
-          name: test-terratests-dep-init-waf-regional-mod
-          command: cd modules/waf-regional && make terratest-dep-init
-
-      - run:
-          name: test-terratests-go-test-waf-regional-mod
-          command: cd modules/waf-regional && make terratest-go-test
+          name: test-terratests-go-test
+          command: make terratest-go-test
 
       - slack/notify:
           event: fail
@@ -284,7 +278,7 @@ jobs:
   #
   release-version-with-changelog:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202107-01
       docker_layer_caching: false
 
     environment:
