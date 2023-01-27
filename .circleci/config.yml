@@ -196,12 +196,20 @@ jobs:
           command: aws ec2 describe-instances --region us-east-1 --profile $AWS_PROFILE_NAME
 
       - run:
-          name: test-terratests-dep-init
-          command: make terratest-dep-init
+          name: test-terratests-dep-init-waf-global-mod
+          command: cd modules/waf-global && make terratest-dep-init
 
       - run:
-          name: test-terratests-go-test
-          command: make terratest-go-test
+          name: test-terratests-go-test-waf-global-mod
+          command: cd modules/waf-global && make terratest-go-test
+
+      - run:
+          name: test-terratests-dep-init-waf-regional-mod
+          command: cd modules/waf-regional && make terratest-dep-init
+
+      - run:
+          name: test-terratests-go-test-waf-regional-mod
+          command: cd modules/waf-regional && make terratest-go-test
 
       - slack/notify:
           event: fail
