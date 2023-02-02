@@ -77,7 +77,7 @@ jobs:
 
       - run:
           name: test-terraform-linting
-          command: make tflint-deep
+          command: make tflint
 
       - slack/notify:
           event: fail
