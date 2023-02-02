@@ -18,7 +18,7 @@ resource "aws_waf_web_acl" "waf_acl" {
       type = var.rule_blacklisted_ips_action_type
     }
 
-    priority = 10
+    priority = 5
     rule_id  = aws_waf_rule.detect_blacklisted_ips.id
     type     = "REGULAR"
   }
