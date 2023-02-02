@@ -6,7 +6,7 @@ jobs:
   #
   test-static-code-and-linting:
     machine:
-      image: ubuntu-2004:202107-01 # Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
+      image: ubuntu-2004:202107-02 # Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2
 
       # This job has been blocked because Docker Layer Caching is not available on your plan.
       # Should upgrade if necessary.
@@ -42,7 +42,7 @@ jobs:
             #
             # Install terraform-docs
             sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-            curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.12.1/terraform-docs-v0.12.1-$(uname | tr '[:upper:]' '[:lower:]')-amd64
+            curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-$(uname | tr '[:upper:]' '[:lower:]')-amd64
             chmod +x ./terraform-docs
             sudo mv ./terraform-docs /usr/local/bin/terraform-docs
 
@@ -154,7 +154,7 @@ jobs:
   #
   test-e2e-terratests:
     machine:
-      image: ubuntu-2004:202107-01
+      image: ubuntu-2004:202107-02 # Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2
       docker_layer_caching: false
 
     steps:
@@ -286,7 +286,7 @@ jobs:
   #
   release-version-with-changelog:
     machine:
-      image: ubuntu-2004:202107-01
+      image: ubuntu-2004:202107-02 # Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2
       docker_layer_caching: false
 
     environment:
