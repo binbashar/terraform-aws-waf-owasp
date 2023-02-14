@@ -9,12 +9,6 @@ variable "blacklisted_ips" {
   description = "List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
-variable "whitelisted_ips" {
-  type        = list(string)
-  default     = []
-  description = "List of IPs to whitwhite, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
-}
-
 variable "admin_remote_ipset" {
   type        = list(string)
   default     = []

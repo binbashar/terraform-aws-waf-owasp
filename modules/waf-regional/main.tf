@@ -10,34 +10,6 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
   }
 
   #
-  # Reason: we are not implementing an IP blacklist yet.
-  # So COMMENT rule block below to deactivate this rule
-  #
-  rule {
-    action {
-      type = var.rule_blacklisted_ips_action_type
-    }
-
-    priority = 5
-    rule_id  = aws_wafregional_rule.detect_blacklisted_ips.id
-    type     = "REGULAR"
-  }
-
-  #
-  # Reason: we are not implementing an IP whitelist yet.
-  # So COMMENT rule block below to deactivate this rule
-  #
-  rule {
-    action {
-      type = var.rule_whitelisted_ips_action_type
-    }
-
-    priority = 10
-    rule_id  = aws_wafregional_rule.detect_whitelisted_ips.id
-    type     = "REGULAR"
-  }
-
-  #
   # Note: we are using this but we are not applying body size restrictions because
   #  uploads could be affected by that.
   #
@@ -46,8 +18,22 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
       type = var.rule_size_restriction_action_type
     }
 
-    priority = 20
+    priority = 10
     rule_id  = aws_wafregional_rule.restrict_sizes.id
+    type     = "REGULAR"
+  }
+
+  #
+  # Reason: we are not implementing an IP blacklist yet.
+  # So COMMENT rule block below to deactivate this rule
+  #
+  rule {
+    action {
+      type = var.rule_blacklisted_ips_action_type
+    }
+
+    priority = 20
+    rule_id  = aws_wafregional_rule.detect_blacklisted_ips.id
     type     = "REGULAR"
   }
 
