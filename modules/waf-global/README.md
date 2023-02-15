@@ -86,14 +86,12 @@ No modules.
 | [aws_waf_byte_match_set.match_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_byte_match_set) | resource |
 | [aws_waf_ipset.admin_remote_ipset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_ipset) | resource |
 | [aws_waf_ipset.blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_ipset) | resource |
-| [aws_waf_ipset.whitelisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_ipset) | resource |
 | [aws_waf_rule.detect_admin_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.detect_bad_auth_tokens](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.detect_blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.detect_php_insecure](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.detect_rfi_lfi_traversal](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.detect_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
-| [aws_waf_rule.detect_whitelisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.enforce_csrf](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.mitigate_sqli](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.mitigate_xss](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |

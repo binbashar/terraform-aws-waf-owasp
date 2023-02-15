@@ -89,14 +89,12 @@ No modules.
 | [aws_wafregional_byte_match_set.match_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
 | [aws_wafregional_ipset.admin_remote_ipset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_ipset) | resource |
 | [aws_wafregional_ipset.blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_ipset) | resource |
-| [aws_wafregional_ipset.whitelisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_ipset) | resource |
 | [aws_wafregional_rule.detect_admin_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.detect_bad_auth_tokens](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.detect_blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.detect_php_insecure](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.detect_rfi_lfi_traversal](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.detect_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
-| [aws_wafregional_rule.detect_whitelisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.enforce_csrf](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.mitigate_sqli](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.mitigate_xss](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
