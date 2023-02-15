@@ -7,6 +7,35 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v1.0.18"></a>
+## [v1.0.18] - 2023-02-15
+
+- Add deprecation notice in READMEs
+- Remove deprecated provider version definition
+- Update README and Terraform linting
+- Remove whitelist implementation
+- Update README files
+- Remove whitelist code
+- Update waf priority rules
+- Update Makefile for terraform v1.x
+- Update test tf linting command
+- Update script for installing terraform-docs v0.16.0
+- Update terraform-doc binary and Ubuntu image
+- Update variables and README files
+- Update Makefile to use TF 1.x
+- Update pre-commit repos
+- Fix run command in CircleCI
+- Update CircleCI image
+- Update deprecation notice on README
+- Update priorities to evaluate IPs listing first
+- Update Makefile for Terratest
+- Run formatting on Terraform resources
+- Add waf-regional module Whitelist IPs feature
+- Add waf-global module Whitelist IPs feature
+- Add deprecation note in README
+- Update README.md
+
+
 <a name="v1.0.17"></a>
 ## [v1.0.17] - 2021-10-08
 
@@ -236,7 +265,8 @@ All notable changes to this project will be documented in this file.
 - Initial Commit terraform-aws-waf-owasp module
 
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.17...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.18...HEAD
+[v1.0.18]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.17...v1.0.18
 [v1.0.17]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.16...v1.0.17
 [v1.0.16]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.15...v1.0.16
 [v1.0.15]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.14...v1.0.15
