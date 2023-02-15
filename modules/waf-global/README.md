@@ -11,6 +11,8 @@
 
 ## terraform-aws-waf-owasp
 
+**DEPRECATION NOTICE:** This module will be not longer maintain because there are other Terraform modules that support these features based on ´wafv2´ Managed rules for AWS Web Application Firewall
+
 ### IMPORTANT CONSIDERATIONS
 1. The original source was taken from https://github.com/Twinuma/terraform-waf-owasp and was adapted to the needs of the project at hand.
 We've also had https://registry.terraform.io/modules/juiceinc/juiceinc-waf as reference.
