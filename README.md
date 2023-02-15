@@ -5,6 +5,8 @@
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
 
+**DEPRECATION NOTICE:** This module will be not longer maintain because there are other Terraform modules that support these features based on ´wafv2´ Managed rules for AWS Web Application Firewall
+
 ## terraform-aws-waf-owasp
 
 ### IMPORTANT CONSIDERATIONS

@@ -7,7 +7,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
   name        = "${var.waf_prefix}-generic-enforce-csrf"
   metric_name = replace("${var.waf_prefix}genericenforcecsrf", "/[^0-9A-Za-z]/", "")
 
-  dynamic predicate {
+  dynamic "predicate" {
     for_each = var.rule_csrf_exclude_methods
     content {
       data_id = aws_wafregional_byte_match_set.exclude_csrf_method[predicate.value].id
@@ -16,7 +16,7 @@ resource "aws_wafregional_rule" "enforce_csrf" {
     }
   }
 
-  dynamic predicate {
+  dynamic "predicate" {
     for_each = var.rule_csrf_include_methods
     content {
       data_id = aws_wafregional_byte_match_set.include_csrf_method[predicate.value].id

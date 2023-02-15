@@ -135,13 +135,13 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
   }
 
   # Logging configuration
-  dynamic logging_configuration {
+  dynamic "logging_configuration" {
     for_each = var.enable_logging ? [true] : []
 
     content {
       log_destination = var.log_destination_arn
 
-      dynamic redacted_fields {
+      dynamic "redacted_fields" {
         for_each = var.log_redacted_fields
 
         content {

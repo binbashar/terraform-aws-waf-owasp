@@ -9,6 +9,8 @@
 
 # Terraform | AWS WAF | OWASP Top 10 vulnerabilities
 
+**DEPRECATION NOTICE:** This module will be not longer maintain because there are other Terraform modules that support these features based on ´wafv2´ Managed rules for AWS Web Application Firewall
+
 ## terraform-aws-waf-owasp
 
 ### IMPORTANT CONSIDERATIONS
@@ -60,50 +62,86 @@ References
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.28 |
-| aws | >= 2.70.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.28 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.70.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.70.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.70.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_wafregional_byte_match_set.csrf_fetch_same_origin](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.csrf_fetch_same_site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.exclude_csrf_method](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.include_csrf_method](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_admin_url](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_auth_tokens](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_php_insecure_uri](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_php_insecure_var_refs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_rfi_lfi_traversal](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_byte_match_set.match_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_byte_match_set) | resource |
+| [aws_wafregional_ipset.admin_remote_ipset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_ipset) | resource |
+| [aws_wafregional_ipset.blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_ipset) | resource |
+| [aws_wafregional_rule.detect_admin_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.detect_bad_auth_tokens](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.detect_blacklisted_ips](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.detect_php_insecure](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.detect_rfi_lfi_traversal](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.detect_ssi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.enforce_csrf](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.mitigate_sqli](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.mitigate_xss](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_rule.restrict_sizes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
+| [aws_wafregional_size_constraint_set.csrf_token_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_size_constraint_set) | resource |
+| [aws_wafregional_size_constraint_set.size_restrictions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_size_constraint_set) | resource |
+| [aws_wafregional_sql_injection_match_set.sql_injection_match_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_sql_injection_match_set) | resource |
+| [aws_wafregional_web_acl.wafregional_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl) | resource |
+| [aws_wafregional_web_acl_association.acl_alb_association](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association) | resource |
+| [aws_wafregional_xss_match_set.xss_match_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_xss_match_set) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| admin\_remote\_ipset | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
-| alb\_arn | List of ALB ARNs | `list(string)` | `[]` | no |
-| blacklisted\_ips | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
-| enable\_logging | Enables logging for the WAF | `bool` | `false` | no |
-| log\_destination\_arn | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
-| log\_redacted\_fields | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `list(object({ type = string, data = string }))` | `[]` | no |
-| rule\_admin\_access\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_admin\_path\_constraints | Customize which paths are considered to be admin paths. | `list(object({ target_string = string, positional_constraint = string }))` | <pre>[<br>  {<br>    "positional_constraint": "STARTS_WITH",<br>    "target_string": "/admin"<br>  }<br>]</pre> | no |
-| rule\_auth\_tokens\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_blacklisted\_ips\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_csrf\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_csrf\_exclude\_methods | HTTP methods to exclude from CSRF checks (if using include, leave this empty) | `list(string)` | <pre>[<br>  "get",<br>  "head",<br>  "options"<br>]</pre> | no |
-| rule\_csrf\_header | The name of your CSRF token header. | `string` | `"x-csrf-token"` | no |
-| rule\_csrf\_include\_methods | HTTP methods to include in CSRF checks (if using exclude, leave this empty) | `list(string)` | `[]` | no |
-| rule\_lfi\_rfi\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_php\_insecurities\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_size\_restriction\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_sqli\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_ssi\_action\_type | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| rule\_xss\_action | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
-| tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
-| waf\_prefix | Prefix to use when naming resources | `string` | n/a | yes |
+| <a name="input_admin_remote_ipset"></a> [admin\_remote\_ipset](#input\_admin\_remote\_ipset) | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| <a name="input_alb_arn"></a> [alb\_arn](#input\_alb\_arn) | List of ALB ARNs | `list(string)` | `[]` | no |
+| <a name="input_blacklisted_ips"></a> [blacklisted\_ips](#input\_blacklisted\_ips) | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | Enables logging for the WAF | `bool` | `false` | no |
+| <a name="input_log_destination_arn"></a> [log\_destination\_arn](#input\_log\_destination\_arn) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
+| <a name="input_log_redacted_fields"></a> [log\_redacted\_fields](#input\_log\_redacted\_fields) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `list(object({ type = string, data = string }))` | `[]` | no |
+| <a name="input_rule_admin_access_action_type"></a> [rule\_admin\_access\_action\_type](#input\_rule\_admin\_access\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_admin_path_constraints"></a> [rule\_admin\_path\_constraints](#input\_rule\_admin\_path\_constraints) | Customize which paths are considered to be admin paths. | `list(object({ target_string = string, positional_constraint = string }))` | <pre>[<br>  {<br>    "positional_constraint": "STARTS_WITH",<br>    "target_string": "/admin"<br>  }<br>]</pre> | no |
+| <a name="input_rule_auth_tokens_action"></a> [rule\_auth\_tokens\_action](#input\_rule\_auth\_tokens\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_blacklisted_ips_action_type"></a> [rule\_blacklisted\_ips\_action\_type](#input\_rule\_blacklisted\_ips\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_csrf_action_type"></a> [rule\_csrf\_action\_type](#input\_rule\_csrf\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_csrf_exclude_methods"></a> [rule\_csrf\_exclude\_methods](#input\_rule\_csrf\_exclude\_methods) | HTTP methods to exclude from CSRF checks (if using include, leave this empty) | `list(string)` | <pre>[<br>  "get",<br>  "head",<br>  "options"<br>]</pre> | no |
+| <a name="input_rule_csrf_header"></a> [rule\_csrf\_header](#input\_rule\_csrf\_header) | The name of your CSRF token header. | `string` | `"x-csrf-token"` | no |
+| <a name="input_rule_csrf_include_methods"></a> [rule\_csrf\_include\_methods](#input\_rule\_csrf\_include\_methods) | HTTP methods to include in CSRF checks (if using exclude, leave this empty) | `list(string)` | `[]` | no |
+| <a name="input_rule_lfi_rfi_action"></a> [rule\_lfi\_rfi\_action](#input\_rule\_lfi\_rfi\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_php_insecurities_action_type"></a> [rule\_php\_insecurities\_action\_type](#input\_rule\_php\_insecurities\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_size_restriction_action_type"></a> [rule\_size\_restriction\_action\_type](#input\_rule\_size\_restriction\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_sqli_action"></a> [rule\_sqli\_action](#input\_rule\_sqli\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_ssi_action_type"></a> [rule\_ssi\_action\_type](#input\_rule\_ssi\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_rule_xss_action"></a> [rule\_xss\_action](#input\_rule\_xss\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
+| <a name="input_waf_prefix"></a> [waf\_prefix](#input\_waf\_prefix) | Prefix to use when naming resources | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| web\_acl\_id | AWS WAF web acl id. |
-| web\_acl\_metric\_name | The name or description for the Amazon CloudWatch metric of this web ACL. |
-| web\_acl\_name | The name or description of the web ACL. |
-
+| <a name="output_web_acl_id"></a> [web\_acl\_id](#output\_web\_acl\_id) | AWS WAF web acl id. |
+| <a name="output_web_acl_metric_name"></a> [web\_acl\_metric\_name](#output\_web\_acl\_metric\_name) | The name or description for the Amazon CloudWatch metric of this web ACL. |
+| <a name="output_web_acl_name"></a> [web\_acl\_name](#output\_web\_acl\_name) | The name or description of the web ACL. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Examples
