@@ -134,6 +134,7 @@ No modules.
 | <a name="input_rule_xss_action"></a> [rule\_xss\_action](#input\_rule\_xss\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | <a name="input_waf_prefix"></a> [waf\_prefix](#input\_waf\_prefix) | Prefix to use when naming resources | `string` | n/a | yes |
+| <a name="input_custom_csrf_token"></a> [custom\_csrf\_token](#input\_custom\_csrf\_token) | Custom CSRF Tokens | `list(map(string))` | '[]' | no |
 
 ## Outputs
 
