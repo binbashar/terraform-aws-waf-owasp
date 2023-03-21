@@ -113,7 +113,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_remote_ipset"></a> [admin\_remote\_ipset](#input\_admin\_remote\_ipset) | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
-| <a name="input_alb_arn"></a> [alb\_arn](#input\_alb\_arn) | List of ALB ARNs | `list(string)` | `[]` | no |
+| <a name="input_resource_arn"></a> [alb\_arn](#input\_alb\_arn) | List of ARN of the resources to associate with. For example, an Application Load Balancer or API Gateway Stage. | `list(string)` | `[]` | no |
 | <a name="input_blacklisted_ips"></a> [blacklisted\_ips](#input\_blacklisted\_ips) | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | Enables logging for the WAF | `bool` | `false` | no |
 | <a name="input_log_destination_arn"></a> [log\_destination\_arn](#input\_log\_destination\_arn) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
@@ -160,8 +160,8 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
-    # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    alb_arn = [
+    # Pass the list of resources ARNs that the WAF ACL will be connected to. (For example, an Application Load Balancer or API Gateway Stage.)
+    resource_arn = [
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345111",
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1244/12345222"
     ]

@@ -55,8 +55,8 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
-    # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    alb_arn = [
+    # Pass the list of resources ARNs that the WAF ACL will be connected to. (For example, an Application Load Balancer or API Gateway Stage.)
+    resource_arn = [
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345111",
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1244/12345222"
     ]
