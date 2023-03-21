@@ -49,3 +49,19 @@ resource "aws_waf_size_constraint_set" "csrf_token_set" {
   }
 }
 
+resource "aws_waf_size_constraint_set" "custom_csrf_token_set" {
+  count = length(var.custom_csrf_token)
+
+  name = "${var.waf_prefix}-${lower(var.custom_csrf_token[count.index].field)}-custom-csrf-token"
+
+  size_constraints {
+    text_transformation = "NONE"
+    comparison_operator = var.custom_csrf_token[count.index].operator
+    size                = var.custom_csrf_token[count.index].size
+
+    field_to_match {
+      type = "HEADER"
+      data = var.custom_csrf_token[count.index].field
+    }
+  }
+}
