@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v1.0.19"></a>
+## [v1.0.19] - 2023-03-22
+
+- Issue | Customize CSRF headers ([#35](https://github.com/binbashar/terraform-waf-owasp/issues/35))
+
+
 <a name="v1.0.18"></a>
 ## [v1.0.18] - 2023-02-15
 
@@ -265,7 +271,8 @@ All notable changes to this project will be documented in this file.
 - Initial Commit terraform-aws-waf-owasp module
 
 
-[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.18...HEAD
+[Unreleased]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.19...HEAD
+[v1.0.19]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.18...v1.0.19
 [v1.0.18]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.17...v1.0.18
 [v1.0.17]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.16...v1.0.17
 [v1.0.16]: https://github.com/binbashar/terraform-waf-owasp/compare/v1.0.15...v1.0.16
