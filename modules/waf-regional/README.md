@@ -102,6 +102,7 @@ No modules.
 | [aws_wafregional_rule.mitigate_xss](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_rule.restrict_sizes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_rule) | resource |
 | [aws_wafregional_size_constraint_set.csrf_token_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_size_constraint_set) | resource |
+| [aws_wafregional_size_constraint_set.custom_csrf_token_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_size_constraint_set) | resource |
 | [aws_wafregional_size_constraint_set.size_restrictions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_size_constraint_set) | resource |
 | [aws_wafregional_sql_injection_match_set.sql_injection_match_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_sql_injection_match_set) | resource |
 | [aws_wafregional_web_acl.wafregional_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl) | resource |
@@ -115,6 +116,7 @@ No modules.
 | <a name="input_admin_remote_ipset"></a> [admin\_remote\_ipset](#input\_admin\_remote\_ipset) | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | <a name="input_alb_arn"></a> [alb\_arn](#input\_alb\_arn) | List of ALB ARNs | `list(string)` | `[]` | no |
 | <a name="input_blacklisted_ips"></a> [blacklisted\_ips](#input\_blacklisted\_ips) | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| <a name="input_custom_csrf_token"></a> [custom\_csrf\_token](#input\_custom\_csrf\_token) | Custom CSRF token set | `list` | `[]` | no |
 | <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | Enables logging for the WAF | `bool` | `false` | no |
 | <a name="input_log_destination_arn"></a> [log\_destination\_arn](#input\_log\_destination\_arn) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
 | <a name="input_log_redacted_fields"></a> [log\_redacted\_fields](#input\_log\_redacted\_fields) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `list(object({ type = string, data = string }))` | `[]` | no |
@@ -134,7 +136,6 @@ No modules.
 | <a name="input_rule_xss_action"></a> [rule\_xss\_action](#input\_rule\_xss\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | <a name="input_waf_prefix"></a> [waf\_prefix](#input\_waf\_prefix) | Prefix to use when naming resources | `string` | n/a | yes |
-| <a name="input_custom_csrf_token"></a> [custom\_csrf\_token](#input\_custom\_csrf\_token) | Custom CSRF Tokens | `list(map(string))` | '[]' | no |
 
 ## Outputs
 
