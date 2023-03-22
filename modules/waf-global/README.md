@@ -99,6 +99,7 @@ No modules.
 | [aws_waf_rule.mitigate_xss](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_rule.restrict_sizes](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_rule) | resource |
 | [aws_waf_size_constraint_set.csrf_token_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_size_constraint_set) | resource |
+| [aws_waf_size_constraint_set.custom_csrf_token_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_size_constraint_set) | resource |
 | [aws_waf_size_constraint_set.size_restrictions](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_size_constraint_set) | resource |
 | [aws_waf_sql_injection_match_set.sql_injection_match_set](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_sql_injection_match_set) | resource |
 | [aws_waf_web_acl.waf_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/waf_web_acl) | resource |
@@ -110,6 +111,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_remote_ipset"></a> [admin\_remote\_ipset](#input\_admin\_remote\_ipset) | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | <a name="input_blacklisted_ips"></a> [blacklisted\_ips](#input\_blacklisted\_ips) | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
+| <a name="input_custom_csrf_token"></a> [custom\_csrf\_token](#input\_custom\_csrf\_token) | Custom CSRF token set | `list` | `[]` | no |
 | <a name="input_rule_admin_access_action_type"></a> [rule\_admin\_access\_action\_type](#input\_rule\_admin\_access\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | <a name="input_rule_auth_tokens_action"></a> [rule\_auth\_tokens\_action](#input\_rule\_auth\_tokens\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | <a name="input_rule_blacklisted_ips_action_type"></a> [rule\_blacklisted\_ips\_action\_type](#input\_rule\_blacklisted\_ips\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |

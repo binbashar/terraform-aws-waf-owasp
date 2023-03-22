@@ -92,3 +92,8 @@ variable "tags" {
   description = "A mapping of tags to assign to all resources"
   default     = {}
 }
+
+variable "custom_csrf_token" {
+  description = "Custom CSRF token set"
+  default     = []
+}

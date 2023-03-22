@@ -114,6 +114,15 @@ module "waf_regional_test" {
     rule_php_insecurities_action_type   = "COUNT"
     rule_csrf_action_type               = "COUNT"
     rule_blacklisted_ips_action_type    = "COUNT"
+
+    # Set custom header for CSRF Token
+    custom_csrf_token = [
+      {
+        field = "X-Twilio-Signature"
+        size = 28
+        operator = "GT"
+      }
+    ]
 }
 ```
 
