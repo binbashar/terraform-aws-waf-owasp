@@ -95,5 +95,5 @@ variable "tags" {
 
 variable "custom_csrf_token" {
   description = "Custom CSRF token set"
-  default = []
+  default     = []
 }
