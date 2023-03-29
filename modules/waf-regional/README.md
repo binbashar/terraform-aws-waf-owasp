@@ -114,12 +114,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_remote_ipset"></a> [admin\_remote\_ipset](#input\_admin\_remote\_ipset) | List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
-| <a name="input_alb_arn"></a> [alb\_arn](#input\_alb\_arn) | List of ALB ARNs | `list(string)` | `[]` | no |
 | <a name="input_blacklisted_ips"></a> [blacklisted\_ips](#input\_blacklisted\_ips) | List of IPs to blacklist, eg ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32'] | `list(string)` | `[]` | no |
 | <a name="input_custom_csrf_token"></a> [custom\_csrf\_token](#input\_custom\_csrf\_token) | Custom CSRF token set | `list` | `[]` | no |
 | <a name="input_enable_logging"></a> [enable\_logging](#input\_enable\_logging) | Enables logging for the WAF | `bool` | `false` | no |
 | <a name="input_log_destination_arn"></a> [log\_destination\_arn](#input\_log\_destination\_arn) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `string` | `""` | no |
 | <a name="input_log_redacted_fields"></a> [log\_redacted\_fields](#input\_log\_redacted\_fields) | Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream | `list(object({ type = string, data = string }))` | `[]` | no |
+| <a name="input_resource_arn"></a> [resource\_arn](#input\_resource\_arn) | List of ARNs of the resource to associate with | `list(string)` | `[]` | no |
 | <a name="input_rule_admin_access_action_type"></a> [rule\_admin\_access\_action\_type](#input\_rule\_admin\_access\_action\_type) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
 | <a name="input_rule_admin_path_constraints"></a> [rule\_admin\_path\_constraints](#input\_rule\_admin\_path\_constraints) | Customize which paths are considered to be admin paths. | `list(object({ target_string = string, positional_constraint = string }))` | <pre>[<br>  {<br>    "positional_constraint": "STARTS_WITH",<br>    "target_string": "/admin"<br>  }<br>]</pre> | no |
 | <a name="input_rule_auth_tokens_action"></a> [rule\_auth\_tokens\_action](#input\_rule\_auth\_tokens\_action) | Rule action type. Either BLOCK, ALLOW, or COUNT (useful for testing) | `string` | `"COUNT"` | no |
@@ -162,8 +162,8 @@ module "waf_regional_test" {
     # List of IPs that are allowed to access admin pages
     admin_remote_ipset = []
 
-    # Pass the list of ALB ARNs that the WAF ACL will be connected to
-    alb_arn = [
+    # Pass the list of resources ARNs that the WAF ACL will be connected to. (For example, an Application Load Balancer or API Gateway Stage.)
+    resource_arn = [
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1233/12345111",
         "arn:aws:elasticloadbalancing:us-east-2:1234567890:loadbalancer/app/some-LB-ABCD1244/12345222"
     ]

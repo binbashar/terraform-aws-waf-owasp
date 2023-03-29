@@ -37,8 +37,8 @@ module "waf_regional_test" {
   # List of IPs that are allowed to access admin pages
   admin_remote_ipset = var.admin_remote_ipset
 
-  # Pass the list of ALB ARNs that the WAF ACL will be connected to
-  alb_arn = [aws_lb.waf_assoc_1.arn, aws_lb.waf_assoc_2.arn, ]
+  # Pass the list of resources ARNs that the WAF ACL will be connected to. (For example, an Application Load Balancer or API Gateway Stage.)
+  resource_arn = [aws_lb.waf_assoc_1.arn, aws_lb.waf_assoc_2.arn, ]
 
   # By default seted to COUNT for testing in order to avoid service affection; when ready, set it to BLOCK
   rule_size_restriction_action_type = "COUNT"

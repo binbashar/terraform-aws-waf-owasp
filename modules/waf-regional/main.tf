@@ -162,8 +162,8 @@ resource "aws_wafregional_web_acl" "wafregional_acl" {
 #
 resource "aws_wafregional_web_acl_association" "acl_alb_association" {
   depends_on   = [aws_wafregional_web_acl.wafregional_acl]
-  count        = length(var.alb_arn)
-  resource_arn = var.alb_arn[count.index]
+  count        = length(var.resource_arn)
+  resource_arn = var.resource_arn[count.index]
   web_acl_id   = aws_wafregional_web_acl.wafregional_acl.id
 }
 

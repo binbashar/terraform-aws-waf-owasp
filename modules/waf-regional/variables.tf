@@ -15,10 +15,10 @@ variable "admin_remote_ipset" {
   description = "List of IPs allowed to access admin pages, ['1.1.1.1/32', '2.2.2.2/32', '3.3.3.3/32']"
 }
 
-variable "alb_arn" {
+variable "resource_arn" {
   type        = list(string)
   default     = []
-  description = "List of ALB ARNs"
+  description = "List of ARNs of the resource to associate with"
 }
 
 variable "rule_sqli_action" {
